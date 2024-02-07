@@ -4,13 +4,15 @@ import App from "./App.jsx";
 import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Layout from "./Layout.jsx";
-import Catlg from "./Components/Catlg.jsx";
+import Catlg from "./Components/Catalogue/Catlg.jsx";
+import Homepage from "./Components/HomePage/Homepage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
+      { path: "", element: <Homepage /> },
       {
         path: "/catlg",
         element: <Catlg />,
