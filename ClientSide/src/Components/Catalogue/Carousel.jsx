@@ -1,47 +1,37 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { Transition } from "@headlessui/react";
 
 const Carousel = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+  // Move to the next image every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
-    <div className="relative">
-      <div className="overflow-hidden">
-        <div className="flex">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`w-full ${
-                index === currentIndex ? "block" : "hidden"
-              }`}
-            >
-              <img src={image} alt={`Slide ${index + 1}`} />
-            </div>
-          ))}
-        </div>
-        <button
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 focus:outline-none"
-          onClick={prevSlide}
-        >
-          Previous
-        </button>
-        <button
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 focus:outline-none"
-          onClick={nextSlide}
-        >
-          Next
-        </button>
+    <div className="relative overflow-hidden">
+      <div className="w-full flex">
+        {images.map((image, i) => (
+          <Transition
+            as="div"
+            key={i}
+            show={index === i}
+            enter="transition-opacity duration-1000"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity duration-1000"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            className="w-full flex-shrink-0"
+          >
+            <img src={image} alt={`Slide ${i + 1}`} className="w-full" />
+          </Transition>
+        ))}
       </div>
     </div>
   );
