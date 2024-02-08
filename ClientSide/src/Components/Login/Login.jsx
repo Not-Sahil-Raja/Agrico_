@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { MoveRight } from "lucide-react";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <>
-      <div className=" bg-[#fffff2] w-full h-[100vh] overflow-hidden pt-[9vh]">
+      <div className=" bg-[#fffff2] w-full h-[100vh] overflow-hidden pt-[9vh] select-none">
         <div className=" w-full flex">
           <div className="  w-1/2 h-[91vh] px-[3vw] py-[5vh] flex flex-col justify-center items-center">
             <div className=" flex flex-col mb-[20vh]">
@@ -29,7 +31,7 @@ const Login = () => {
                   className=" w-full h-[90vh] object-cover object-center brightness-50 absolute"
                 />
               </div>
-              <div className=" absolute text-[5vw] top-1/2 left-1/2 text-[#ffffffd2] [transform:translate(-50%,-240%)] whitespace-nowrap ">
+              <div className=" absolute text-[5vw] top-1/2 left-1/2 text-[#ffffffc2] [transform:translate(-50%,-240%)] whitespace-nowrap ">
                 Welcome Back.
               </div>
               <div className=" z-20 bg-[#ffffffdc] absolute top-1/2 left-1/2 [transform:translate(-50%,-40%)] w-1/2 h-2/3 rounded-md  drop-shadow-md">
@@ -38,19 +40,27 @@ const Login = () => {
                     <div className="  ">
                       <span className=" text-2xl">Login</span>
                     </div>
-                    <div className=" h-[30vh] bg-green-400  flex flex-col justify-evenly">
-                      <div className=" w-full flex flex-col bg-orange-300">
-                        <span className=" text-sm">Email</span>
+                    <div className=" h-[30vh]   flex flex-col justify-evenly">
+                      <div className=" w-full flex flex-col  h-1/2 justify-center">
+                        <span className=" text-sm font-medium">Email</span>
                         <input
-                          type="text"
+                          type="email"
                           className=" border-b border-[#3f3f3f] focus:outline-none bg-transparent"
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                          }}
                         />
                       </div>
-                      <div className=" w-full flex flex-col">
-                        <span className=" text-sm">Password</span>
+                      <div className=" w-full flex flex-col h-1/2 justify-center">
+                        <span className=" text-sm font-medium">Password</span>
                         <input
                           type="password"
                           className=" border-b border-[#222222] focus:outline-none bg-transparent"
+                          value={password}
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                          }}
                         />
                       </div>
                     </div>
@@ -58,7 +68,7 @@ const Login = () => {
                     <input
                       type="submit"
                       value="Login"
-                      className=" bg-[#000000] text-[#fffff2] py-2 rounded-lg cursor-pointer hover:bg-[#203121] transition-all duration-300 ease-in-out hover:shadow-inner focus:outline-none"
+                      className=" bg-[#000000] text-[#fffff2] py-2 rounded-lg cursor-pointer hover:bg-[#0f110f] transition-all duration-300 ease-in-out hover:shadow-inner focus:outline-none"
                     />
                   </div>
                 </form>

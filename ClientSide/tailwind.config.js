@@ -6,7 +6,7 @@ export default {
     extend: {
       colors: {
         pYellow: "#DFAF5E",
-        oliveGreen: "61714D",
+        oliveGreen: "#61714D",
         lightOlive: "#8FAE93",
       },
       fontFamily: { NunitoSans: "Nunito Sans" },
