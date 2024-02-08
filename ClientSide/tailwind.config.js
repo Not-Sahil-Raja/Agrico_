@@ -2,6 +2,7 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    darkMode: "class", // or 'media' or 'class'
     extend: {
       colors: {
         pYellow: "#DFAF5E",
