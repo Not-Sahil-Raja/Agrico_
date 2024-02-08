@@ -53,11 +53,11 @@ const Header = () => {
         </NavLink>
       </div>
       <div className=" flex gap-[1vw]">
-        <span className=" bg-[#fccc83] px-[.75vw] flex items-center justify-center rounded-xl cursor-pointer">
+        <span className=" bg-oliveGreen text-white hover:brightness-90 px-[.95vw] flex items-center justify-center rounded cursor-pointer transition-all">
           <NavLink to="/login">Login</NavLink>
         </span>
-        <div className=" bg-[#fccc83]  p-[.4vw] aspect-square rounded-full drop-shadow-md flex text-center ustify-center items-center ">
-          <UserRound className=" " />
+        <div className=" bg-[#fccc83]  p-[.4vw] aspect-square rounded-full cursor-pointe flex text-center ustify-center items-center ">
+          <UserRound className="" />
         </div>
       </div>
     </div>
