@@ -6,9 +6,10 @@ import "./index.css";
 import Layout from "./Layout.jsx";
 import Catlg from "./Components/Catalogue/Catlg.jsx";
 import Homepage from "./Components/HomePage/Homepage.jsx";
-
+import AboutUs from "./Components/AboutUs/AboutUs.jsx";
 import MarketPlace from "./Components/MarketPlace/MarketPlace.jsx";
 import Login from "./Components/Login/Login.jsx";
+import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,15 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/contact",
+        element: <ContactUs />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+      },
+
       {
         path: "/marketPlace",
         element: <MarketPlace />,
