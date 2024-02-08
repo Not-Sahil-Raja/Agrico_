@@ -6,7 +6,9 @@ import "./index.css";
 import Layout from "./Layout.jsx";
 import Catlg from "./Components/Catalogue/Catlg.jsx";
 import Homepage from "./Components/HomePage/Homepage.jsx";
-import Resource from "./Components/Resources/Resource.jsx";
+
+import MarketPlace from "./Components/MarketPlace/MarketPlace.jsx";
+import Login from "./Components/Login/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,8 +21,12 @@ const router = createBrowserRouter([
         element: <Catlg />,
       },
       {
-        path: "/resources",
-        element: <Resource />,
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/marketPlace",
+        element: <MarketPlace />,
       },
     ],
   },

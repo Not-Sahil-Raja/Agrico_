@@ -40,7 +40,7 @@ const Header = () => {
           Catalouge
         </NavLink>
         <NavLink
-          to="/resources"
+          to="/marketPlace"
           className={({ isActive }) =>
             `  px-[1.5vw] py-[.35vh] rounded-[0.5vw]  ${
               isActive
@@ -49,12 +49,12 @@ const Header = () => {
             }`
           }
         >
-          Resource
+          MarketPlace
         </NavLink>
       </div>
       <div className=" flex gap-[1vw]">
         <span className=" bg-[#fccc83] px-[.75vw] flex items-center justify-center rounded-xl cursor-pointer">
-          Login
+          <NavLink to="/login">Login</NavLink>
         </span>
         <div className=" bg-[#fccc83]  p-[.4vw] aspect-square rounded-full drop-shadow-md flex text-center ustify-center items-center ">
           <UserRound className=" " />

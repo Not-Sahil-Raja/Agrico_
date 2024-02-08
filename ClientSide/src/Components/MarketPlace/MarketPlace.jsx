@@ -2,12 +2,12 @@ import React from "react";
 import { Search, MoveRight } from "lucide-react";
 import { useState } from "react";
 
-const Resource = () => {
+const MarketPlace = () => {
   const [marType, setMarType] = useState(0);
   console.log(marType);
   return (
     <>
-      <div className="   bg-[#fffff2] w-full h-[100vh]  overflow-hidden">
+      <div className="   bg-[#fffff2] w-full h-[100vh]  overflow-hidden select-none">
         <div className=" w-full h-[40vh] bg-slate-300 overflow-hidden relative">
           <img
             src="https://images.unsplash.com/photo-1530267981375-f0de937f5f13?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -87,13 +87,13 @@ const Resource = () => {
                 Flipkart
               </div>
             </div>
-            <div className=" ml-auto py-[.2vh] px-[.5vw] rounded-lg bg-[#e9e9e9] drop-shadow-md  mx-[2vw] flex justify-around items-center gap-[1vw]">
+            <div className=" ml-auto py-[.2vh] px-[.5vw] rounded-lg  drop-shadow-md  mx-[2vw] flex justify-around items-center gap-[1vw] border border-[#3f3838]">
               <img
                 src=" https://images.unsplash.com/photo-1612736231323-e7bcba8fcbaf?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
                 className=" w-[2.3rem] h-[2.3rem] object-cover rounded-lg"
               />
-              <div className=" flex flex-col  flex-[2] text-sm font-medium">
+              <div className=" flex flex-col  flex-[2] text-sm font-medium ">
                 <p>Need Help? </p>
                 <span>Ask a specalist</span>
               </div>
@@ -135,4 +135,4 @@ const Resource = () => {
   );
 };
 
-export default Resource;
+export default MarketPlace;
