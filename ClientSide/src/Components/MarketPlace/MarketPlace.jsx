@@ -1,9 +1,16 @@
 import React from "react";
-import { Search, MoveRight } from "lucide-react";
+import { Search, MoveRight, XSquare } from "lucide-react";
 import { useState } from "react";
 
 const MarketPlace = () => {
   const [marType, setMarType] = useState(0);
+  const [additemCheck, setAdditemCheck] = useState(false);
+
+  const addItem = (e) => {
+    e.preventDefault();
+    console.log("Item Added");
+  };
+
   console.log(marType);
   return (
     <>
@@ -11,7 +18,7 @@ const MarketPlace = () => {
         <div className=" w-full h-[40vh] bg-slate-300 overflow-hidden relative">
           <img
             src="https://images.unsplash.com/photo-1530267981375-f0de937f5f13?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            className=" w-[100vw] h-[50vh] object-cover brightness-[.3] absolute  z-0"
+            className=" w-[100vw] h-[50vh] object-cover brightness-[.3] absolute z-10"
           />
 
           <div className=" absolute z-20 top-1/2 left-1/2  text-[white] w-[50%] h-[25vh]  [transform:translate(-50%,-30%)] flex-col flex items-center justify-around">
@@ -99,34 +106,111 @@ const MarketPlace = () => {
               </div>
             </div>
           </div>
-          <div className="  w-full h-[55vh] pt-[10vh] overflow-hidden relative">
-            <div
-              className={`h-[80vh] w-full bg-green-400 overflow-y-scroll scrollbar-hide text-3xl absolute transition-all   ${
-                marType === 0 ? "left-[0%]  delay-0" : "left-[100%] delay-100"
-              }  `}
-            >
-              All
+
+          {/* marketPlace card showing areas */}
+          <div className=" w-[100vw] flex justify-evenly items-end ">
+            <div className="  w-[60%] h-[55vh] pt-[10vh] overflow-hidden relative">
+              <div
+                className={`h-[80vh] w-full bg-green-400 overflow-y-scroll scrollbar-hide text-3xl absolute transition-all   ${
+                  marType === 0 ? "left-[0%]  delay-0" : "left-[100%] delay-100"
+                }  `}
+              >
+                All
+              </div>
+              <div
+                className={`h-[80vh] w-full bg-green-500 overflow-y-scroll scrollbar-hide text-3xl absolute  transition-all ${
+                  marType === 1 ? "left-[0%] delay-0" : "left-[100%] delay-100"
+                }`}
+              >
+                Offline
+              </div>
+              <div
+                className={`h-[80vh] w-full bg-green-600 overflow-y-scroll scrollbar-hide text-3xl absolute transition-all ${
+                  marType === 2 ? "left-[0%] delay-0" : "left-[100%] delay-100"
+                }`}
+              >
+                Amazon
+              </div>
+              <div
+                className={`h-[80vh] w-full bg-green-700 overflow-y-scroll scrollbar-hide text-3xl absolute  transition-all ${
+                  marType === 3 ? "left-[0%] delay-0" : "left-[100%] delay-100"
+                }`}
+              >
+                Flipkart
+              </div>
             </div>
-            <div
-              className={`h-[80vh] w-full bg-green-500 overflow-y-scroll scrollbar-hide text-3xl absolute  transition-all ${
-                marType === 1 ? "left-[0%] delay-0" : "left-[100%] delay-100"
-              }`}
-            >
-              Offline
-            </div>
-            <div
-              className={`h-[80vh] w-full bg-green-600 overflow-y-scroll scrollbar-hide text-3xl absolute transition-all ${
-                marType === 2 ? "left-[0%] delay-0" : "left-[100%] delay-100"
-              }`}
-            >
-              Amazon
-            </div>
-            <div
-              className={`h-[80vh] w-full bg-green-700 overflow-y-scroll scrollbar-hide text-3xl absolute  transition-all ${
-                marType === 3 ? "left-[0%] delay-0" : "left-[100%] delay-100"
-              }`}
-            >
-              Flipkart
+
+            <div className="  w-[30%] h-[45vh]  rounded-lg relative drop-shadow-md overflow-hidden">
+              <div className=" h-full bg-gradient-to-r from-lightYellow via-lightOrange to-extralightYellow flex flex-col overflow-hidden  ">
+                <div
+                  className={` px-[2%] py-[2%] text-sm absolute  h-[33vh] w-full  transition-transform ${
+                    additemCheck
+                      ? "translate-x-0"
+                      : " [transform:translate(0%,-100%)]"
+                  } `}
+                >
+                  <form
+                    onSubmit={addItem}
+                    className=" h-full relative flex flex-col justify-evenly bg-[#2b2b2b27] backdrop-blur-sm px-[2%] py-[2%] rounded-lg font-Montserrat font-semibold"
+                  >
+                    <button
+                      className=" absolute z-30 right-[-1%] top-[-3%]"
+                      onClick={() => setAdditemCheck(!additemCheck)}
+                    >
+                      <XSquare className=" hover:rotate-12 transition-all" />
+                    </button>
+                    <div className=" flex flex-col relative">
+                      <label htmlFor="name" className=" absolute top-[-70%]">
+                        Item Name
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        className=" w-full h-[5vh] border-2 border-[#03030362] rounded-lg px-[1%] font-Montserrat font-semibold focus:outline-none transition-all  hover:border-[#201c1c]"
+                      />
+                    </div>
+                    <div className=" flex flex-col relative">
+                      <label htmlFor="" className=" absolute top-[-70%]">
+                        Item Price
+                      </label>
+                      <input
+                        type="number"
+                        id=""
+                        className=" w-full h-[5vh] border-2 border-[#03030362] rounded-lg px-[1%] font-Montserrat font-semibold focus:outline-none transition-all  hover:border-[#201c1c]"
+                      />
+                    </div>
+                    <div className=" flex flex-col relative">
+                      <label htmlFor="" className=" absolute top-[-70%]">
+                        Item Quantity
+                      </label>
+                      <input
+                        type="number"
+                        id=""
+                        className=" w-full h-[5vh] border-2 border-[#03030362] rounded-lg px-[1%] font-Montserrat font-semibold focus:outline-none transition-all  hover:border-[#201c1c]"
+                      />
+                    </div>
+                  </form>
+                </div>
+                <div
+                  className={`  h-[15%] px-[2%] py-[2%] text-sm  ${
+                    additemCheck ? "mt-auto" : " mt-0 "
+                  }`}
+                >
+                  <button
+                    className=" bg-transparent text-[#292929] border-2 border-[#201c1c] hover:bg-[#0f0f0f28]  transition-all font-Archivo font-semibold w-full h-full rounded-lg "
+                    onClick={() => setAdditemCheck(!additemCheck)}
+                  >
+                    ADD NEW ITEM
+                  </button>
+                </div>
+                <div
+                  className={`absolute bottom-[0vh] bg-pink-300 w-full h-[80%] transition-transform ${
+                    additemCheck ? "[transform:translate(0%,100%)]" : ""
+                  } `}
+                >
+                  View Items
+                </div>
+              </div>
             </div>
           </div>
         </div>
