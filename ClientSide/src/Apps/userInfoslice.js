@@ -14,7 +14,12 @@ export const userInfoSlice = createSlice({
     userlogin: (state, action) => {
       state.userInfo.username = action.payload.username;
       state.userInfo.email = action.payload.email;
-      console.log(state.userInfo.username, state.userInfo.email);
+      state.userInfo.show = action.payload.show;
+      console.log(
+        state.userInfo.username,
+        state.userInfo.email,
+        state.userInfo.show
+      );
       localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
     },
     userlogout: (state) => {

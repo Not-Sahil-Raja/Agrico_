@@ -21,11 +21,18 @@ const Login = () => {
       } else if (res.data.password != password) {
         console.log("Wrong password"); //wrong pass
       } else {
-        console.log("Logged In"); //logged in
+        console.log("Logged In", res.data.username); //logged in
+        Dispatch(
+          userlogin({
+            username: password,
+            email: email,
+            show: res.data.username,
+          })
+        );
       }
     });
     console.log(email, password);
-    Dispatch(userlogin({ username: password, email: email }));
+
     setEmail("");
     setPassword("");
   };
