@@ -1,11 +1,22 @@
 import React from "react";
 import { UserRound } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { userlogout } from "../../Apps/userInfoslice.js";
 
 const Header = () => {
+  const Dispatch = useDispatch();
+  const logout = () => {
+    Dispatch(userlogout());
+    console.log("loggged Out");
+  };
+
+  const userDet = useSelector((state) => state.userInfo.userInfo);
+  console.log(userDet);
   return (
-    <div className="  mt-[.75vh]  px-[3vw] py-[.5vh] absolute w-full flex font-NunitoSans text-lg text-[#2b1c1c] font-[570] justify-around items-center drop-shadow-md gap-[5vw] z-50">
-      <div className="  w-[19vw] bg-[#fdcb74da] h-[5.8vh] mr-auto rounded-2xl px-[1vw] flex  justify-evenly items-center shadow-inner backdrop-blur-xl">
+    <div className="  mt-[.75vh]  px-[3vw] py-[.5vh] absolute w-full flex font-Archivo text-lg text-[#2b1c1c] font-[570] justify-around items-center drop-shadow-md gap-[5vw] z-50">
+      <div className="  w-[19vw] bg-[#fdcb74da] h-[5.8vh] mr-auto rounded-2xl px-[1vw] flex  justify-evenly items-center shadow-inner backdrop-blur-xl ">
         <Link className=" py-[.5vh] bg-[#fff7c87e] px-[.35vw] text-center flex-1 backdrop-blur-xl">
           Logo
         </Link>
@@ -52,13 +63,33 @@ const Header = () => {
           MarketPlace
         </NavLink>
       </div>
-      <div className=" flex gap-[1vw]">
-        <span className=" bg-oliveGreen text-white hover:brightness-90 px-[.95vw] flex items-center justify-center rounded cursor-pointer transition-all">
-          <NavLink to="/login">Login</NavLink>
+      <div className=" flex gap-[1vw] items-center">
+        <span className="  overflow-hidden text-white hover:brightness-90 w-[6vw] h-[5.3vh] relative flex items-center justify-center rounded-sm cursor-pointer transition-all">
+          <button
+            className={`top-1/2 left-1/2 bg-[#b35e5e] absolute transition-transform w-full h-full flex items-center justify-center  ${
+              userDet.username
+                ? " [transform:translate(-50%,-50%)]"
+                : "[transform:translate(-200%,-50%)]"
+            }`}
+            onClick={logout}
+          >
+            Logout
+          </button>
+          <NavLink
+            to="/login"
+            className={() =>
+              ` top-1/2 left-1/2 bg-oliveGreen absolute transition-transform  w-full h-full flex items-center justify-center  ${
+                userDet.username
+                  ? "[transform:translate(100%,-50%)]"
+                  : "[transform:translate(-50%,-50%)]"
+              }`
+            }
+          >
+            Login
+          </NavLink>
         </span>
-        <div className=" bg-[#fccc83]  p-[.4vw] aspect-square rounded-full cursor-pointe flex text-center ustify-center items-center ">
-          <UserRound className="" />
-        </div>
+
+        <UserRound className=" aspect-square bg-[#e6e6e6fb] drop-shadow shadow-inner text-[#353535] hover:backdrop-blur-sm rounded-[50%] transition-all cursor-pointer p-1 scale-110 hover:scale-125" />
       </div>
     </div>
   );
