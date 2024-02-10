@@ -10,6 +10,8 @@ import AboutUs from "./Components/AboutUs/AboutUs.jsx";
 import MarketPlace from "./Components/MarketPlace/MarketPlace.jsx";
 import Login from "./Components/Login/Login.jsx";
 import ContactUs from "./Components/ContactUs/ContactUs.jsx";
+import { store } from "./Apps/store.js";
+import { Provider } from "react-redux";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <Provider store={store}>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </Provider>
 );

@@ -4,8 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="  mt-[.75vh]  px-[3vw] py-[.5vh] absolute w-full flex font-NunitoSans text-lg text-[#2b1c1c] font-[570] justify-around items-center drop-shadow-md gap-[5vw] z-50">
-      <div className="  w-[19vw] bg-[#fdcb74da] h-[5.8vh] mr-auto rounded-2xl px-[1vw] flex  justify-evenly items-center shadow-inner backdrop-blur-xl">
+    <div className="  mt-[.75vh]  px-[3vw] py-[.5vh] absolute w-full flex font-Archivo text-lg text-[#2b1c1c] font-[570] justify-around items-center drop-shadow-md gap-[5vw] z-50">
+      <div className="  w-[19vw] bg-[#fdcb74da] h-[5.8vh] mr-auto rounded-2xl px-[1vw] flex  justify-evenly items-center shadow-inner backdrop-blur-xl ">
         <Link className=" py-[.5vh] bg-[#fff7c87e] px-[.35vw] text-center flex-1 backdrop-blur-xl">
           Logo
         </Link>
@@ -52,13 +52,12 @@ const Header = () => {
           MarketPlace
         </NavLink>
       </div>
-      <div className=" flex gap-[1vw]">
-        <span className=" bg-oliveGreen text-white hover:brightness-90 px-[.95vw] flex items-center justify-center rounded cursor-pointer transition-all">
+      <div className=" flex gap-[1vw] items-center">
+        <span className=" bg-oliveGreen text-white hover:brightness-90 px-[.95vw] py-[.3vh] flex items-center justify-center rounded-sm cursor-pointer transition-all">
           <NavLink to="/login">Login</NavLink>
         </span>
-        <div className=" bg-[#fccc83]  p-[.4vw] aspect-square rounded-full cursor-pointe flex text-center ustify-center items-center ">
-          <UserRound className="" />
-        </div>
+
+        <UserRound className=" aspect-square bg-[#e6e6e6fb] drop-shadow shadow-inner text-[#353535] hover:backdrop-blur-sm rounded-[50%] transition-all cursor-pointer p-1 scale-110 hover:scale-125" />
       </div>
     </div>
   );
