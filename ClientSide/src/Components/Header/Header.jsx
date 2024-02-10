@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { userlogout } from "../../Apps/userInfoslice.js";
+import { ShoppingCart } from "lucide-react";
 
 const Header = () => {
   const Dispatch = useDispatch();
@@ -64,7 +65,11 @@ const Header = () => {
         </NavLink>
       </div>
       <div className=" flex gap-[1vw] items-center">
-        <span className="  overflow-hidden text-white hover:brightness-90 w-[6vw] h-[5.3vh] relative flex items-center justify-center rounded-sm cursor-pointer transition-all">
+        <div className=" w-[22%] h-[4vh] flex justify-center items-center rounded bg-[#dbdbdbdc] overflow-hidden cursor-pointer border border-oliveGreen hover:bg-oliveGreen transition-all hover:text-[white]">
+          <ShoppingCart className=" aspect-square   w-full h-[4vh] p-[.8vh] " />
+        </div>
+
+        <span className="  overflow-hidden text-white hover:brightness-90 w-[6vw] h-[5vh] relative flex items-center justify-center rounded-sm cursor-pointer transition-all">
           <button
             className={`top-1/2 left-1/2 bg-[#b35e5e] absolute transition-transform w-full h-full flex items-center justify-center  ${
               userDet.username
@@ -73,7 +78,7 @@ const Header = () => {
             }`}
             onClick={logout}
           >
-            Logout
+            {userDet.show}
           </button>
           <NavLink
             to="/login"

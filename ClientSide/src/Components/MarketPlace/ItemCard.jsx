@@ -1,6 +1,10 @@
 import React from "react";
+import { ShoppingBag } from "lucide-react";
 
 const ItemCard = ({ item }) => {
+  const addToCart = () => {
+    console.log("Added to Cart", item._id);
+  };
   return (
     <div className="  h-[30vh] text-sm  bg-[#fffffff6] rounded-lg flex flex-col justify-between items-center px-[2%] font-Montserrat font-semibold relative">
       <img
@@ -9,14 +13,23 @@ const ItemCard = ({ item }) => {
         className=" w-full h-full object-cover rounded-lg absolute z-10 brightness-90"
       />
 
-      <div className=" font-semibold w-[90%] text-ellipsis top-[5%] text-[#3a3a3a] whitespace-nowrap overflow-hidden shadow-text absolute z-20">
+      <div className=" font-semibold w-[50%] px-[2%] py-[3%] text-center bg-[#1d1d1d48] rounded-lg shadow-inner text-ellipsis top-[5%]  whitespace-nowrap overflow-hidden shadow-text absolute z-20 backdrop-blur-sm text-[#f3f3f3] border  ">
         {item.itemName}
       </div>
-      <div className="  whitespace-nowrap bottom-[5%] right-[5%] text-[#f3f3f3] absolute z-20 font-semibold shadow-text bg-[#00000093] px-[1vw] py-[.5%] rounded border border-[black]">
-        {item.price} ₹
+      <div className=" flex flex-col items-end border whitespace-nowrap bottom-[5%] right-[5%] text-[#f3f3f3] absolute z-20 font-semibold shadow-text  px-[1vw] py-[.5%] rounded   drop-shadow-md backdrop-blur-md">
+        <span>{item.price} ₹</span>
+        <span>{item.quantity} Kg</span>
       </div>
-      <div className=" whitespace-nowrap bottom-[5%] left-[5%] text-[#f3f3f3] absolute z-20 font-semibold shadow-text bg-[#201c1c93] px-[1vw] py-[.5%] rounded-md border border-[#1f1e1e]">
-        {item.quantity} Kg
+
+      <div
+        className=" flex  justify-center items-center bg-[#0000009f] border aspect-square whitespace-nowrap bottom-[5%] left-[5%] text-[#f3f3f3] absolute z-20 font-semibold shadow-text px-[.2vw]  rounded hover:bg-black transition-all drop-shadow-md backdrop-blur-md cursor-pointer"
+        onClick={addToCart}
+      >
+        <ShoppingBag
+          size={20}
+          color="#fffafa"
+          className=" hover:scale-90 transition-all"
+        />
       </div>
     </div>
   );

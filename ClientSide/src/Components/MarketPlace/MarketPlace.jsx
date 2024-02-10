@@ -4,8 +4,11 @@ import { useState } from "react";
 import axios from "axios";
 import ListedItem from "./ListedItem";
 import AllItems from "./AllItems";
+import { useSelector } from "react-redux";
 
 const MarketPlace = () => {
+  const userInfos = useSelector((state) => state.userInfo.userInfo);
+
   const [marType, setMarType] = useState(0);
   const [additemCheck, setAdditemCheck] = useState(false);
   const [addedPop, setAddedPop] = useState(false);
@@ -231,6 +234,7 @@ const MarketPlace = () => {
                     ${additemCheck ? "scale-0" : "hover:backdrop-blur-md"}
                     `}
                     onClick={() => setAdditemCheck(!additemCheck)}
+                    disabled={!userInfos.username}
                   >
                     ADD NEW ITEM
                   </button>
