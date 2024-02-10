@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MoveRight } from "lucide-react";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,13 +17,27 @@ const Login = () => {
     setPassword("");
   };
   const registerCheck = (e) => {
-    //need to add the backend code here
     e.preventDefault();
-    console.log(userName, email, phoneNo, password);
-    setUserName("");
-    setEmail("");
-    setPhoneNo("");
-    setPassword("");
+
+    const userdata = {
+      username: userName,
+      email: email,
+      phno: phoneNo,
+      password: password,
+    };
+
+    axios
+      .post("http://localhost:3000/postallusers", userdata)
+      .then(() => {
+        setUserName("");
+        setEmail("");
+        setPhoneNo("");
+        setPassword("");
+        console.log(userName, email, phoneNo, password);
+      })
+      .catch((e) => {
+        console.log("Unable to post", e);
+      });
   };
 
   return (

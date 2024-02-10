@@ -3,7 +3,7 @@ import { User } from "../models/users.model.js";
 
 const router = express.Router();
 
-router.get("/allusers", async (req, res) => {
+router.get("/getallusers", async (req, res) => {
   try {
     const users = await User.find({});
     console.log("DB.find Called");
@@ -11,6 +11,30 @@ router.get("/allusers", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");
+  }
+});
+
+router.post("/postallusers", async (req, res) => {
+  try {
+    if (
+      (!req.body.username, !req.body.email, !req.body.phno, !req.body.password)
+    ) {
+      return res.status(400).send("All fields required");
+    }
+
+    const newUser = {
+      username: req.body.username,
+      email: req.body.email,
+      phno: req.body.phno,
+      password: req.body.password,
+    };
+
+    const userAdded = await User.create(newUser);
+    console.log("newuser", userAdded);
+    return res.status(201).send(userAdded);
+  } catch (error) {
+    console.log("Unable to push to DB", error.message);
+    res.status(500).send({ message: error.message });
   }
 });
 
