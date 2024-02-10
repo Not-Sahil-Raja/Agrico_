@@ -47,4 +47,14 @@ router.get("/getuser/:email", async (req, res) => {
     console.log("Did not receive username : ", e.message);
   }
 });
+
+router.get("/checkmail/:email", async (req, res) => {
+  try {
+    const chkmail = req.params.email;
+    const foundchkmail = await User.findOne({ email: chkmail });
+    return res.status(200).json(foundchkmail);
+  } catch (e) {
+    console.log("Error in email check : ", e.message);
+  }
+});
 export default router;

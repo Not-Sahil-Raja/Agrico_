@@ -13,7 +13,6 @@ const Login = () => {
   const [phoneNo, setPhoneNo] = useState("");
 
   const loginCheck = (e) => {
-    //need to add the backend code here
     e.preventDefault();
 
     axios.get(`http://localhost:3000/getuser/${email}`).then((res) => {
@@ -53,6 +52,18 @@ const Login = () => {
         console.log("Unable to post", e);
       });
   };
+
+  useEffect(() => {
+    if (email != "" && login == false) {
+      axios.get(`http://localhost:3000/checkmail/${email}`).then((res) => {
+        if (!res.data) {
+          console.log("Email does NOT EXIST");
+        } else {
+          console.log("Email already EXISTS");
+        }
+      });
+    }
+  }, [email]);
 
   return (
     <>
@@ -209,7 +220,7 @@ const Login = () => {
 
                     <input
                       type="submit"
-                      value="Login"
+                      value="Register"
                       className=" bg-[#000000] text-[#fffff2] py-2 rounded cursor-pointer hover:bg-[#0f110f] transition-all duration-300 ease-in-out hover:shadow-inner focus:outline-none"
                     />
                   </div>
