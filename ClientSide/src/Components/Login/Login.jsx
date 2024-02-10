@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MoveRight } from "lucide-react";
 import axios from "axios";
 
@@ -12,6 +12,16 @@ const Login = () => {
   const loginCheck = (e) => {
     //need to add the backend code here
     e.preventDefault();
+
+    axios.get(`http://localhost:3000/getuser/${email}`).then((res) => {
+      if (!res.data) {
+        console.log("Email not Found"); //email not found
+      } else if (res.data.password != password) {
+        console.log("Wrong password"); //wrong pass
+      } else {
+        console.log("Logged In"); //logged in
+      }
+    });
     console.log(email, password);
     setEmail("");
     setPassword("");
