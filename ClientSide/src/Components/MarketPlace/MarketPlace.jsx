@@ -1,17 +1,63 @@
-import React from "react";
-import { Search, MoveRight, XSquare } from "lucide-react";
+import React, { useEffect } from "react";
+import { Search, MoveRight, XSquare, CheckSquare2 } from "lucide-react";
 import { useState } from "react";
+import axios from "axios";
+import ListedItem from "./ListedItem";
+import AllItems from "./AllItems";
 
 const MarketPlace = () => {
   const [marType, setMarType] = useState(0);
   const [additemCheck, setAdditemCheck] = useState(false);
+  const [addedPop, setAddedPop] = useState(false);
+
+  const [refresh, setRefresh] = useState(0);
+
+  const [addedItemList, setAddedItemList] = useState([]);
+
+  const [itemName, setItemName] = useState("");
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
+  // console.log(addedItemList);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/itemsList")
+      .then((res) => {
+        setAddedItemList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [refresh]);
 
   const addItem = (e) => {
     e.preventDefault();
+    const item = {
+      itemName: itemName,
+      price: price,
+      quantity: quantity,
+      username: "username",
+    };
+    axios
+      .post("http://localhost:3000/Allitems", item)
+      .then((res) => {
+        console.log(res.data);
+        setAddedPop(true);
+        setTimeout(() => {
+          setAddedPop(false);
+          setItemName("");
+          setPrice("");
+          setQuantity("");
+        }, 2000);
+        setRefresh(refresh + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     console.log("Item Added");
   };
 
-  console.log(marType);
   return (
     <>
       <div className="   bg-[#fffff2] w-full h-[100vh]  overflow-hidden select-none">
@@ -52,7 +98,7 @@ const MarketPlace = () => {
         {/* marketPlace */}
         <div className="  relative overflow-y-scroll h-[60vh] scrollbar-hide px-[1vw] py-[2vh]">
           <div className=" absolute w-[92vw] left-[4%] py-[1vh] z-40  flex items-center backdrop-blur-md rounded-3xl">
-            <div className=" flex px-[2vw] gap-[.5vw] justify-around w-[35vw]">
+            <div className=" flex px-[2vw] gap-[.5vw] justify-around w-[15vw]">
               <div
                 className={` px-[1vw] py-[.8vh] rounded-lg border border-[#3f3838] transition-all  font-medium whitespace-nowrap cursor-pointer ${
                   marType === 0
@@ -71,27 +117,7 @@ const MarketPlace = () => {
                 }`}
                 onClick={() => setMarType(1)}
               >
-                Offline Market
-              </div>
-              <div
-                className={` px-[1vw] py-[.8vh] rounded-lg border border-[#3f3838] transition-all  font-medium whitespace-nowrap cursor-pointer ${
-                  marType === 2
-                    ? "bg-[#3f3838] shadow-inner text-[#ffffff] "
-                    : "hover:backdrop-blur-sm "
-                }`}
-                onClick={() => setMarType(2)}
-              >
-                Amazon
-              </div>
-              <div
-                className={` px-[1vw] py-[.8vh] rounded-lg border border-[#3f3838] transition-all  font-medium whitespace-nowrap cursor-pointer ${
-                  marType === 3
-                    ? "bg-[#3f3838] shadow-inner text-[#ffffff] "
-                    : "hover:backdrop-blur-sm "
-                }`}
-                onClick={() => setMarType(3)}
-              >
-                Flipkart
+                Filter
               </div>
             </div>
             <div className=" ml-auto py-[.2vh] px-[.5vw] rounded-lg  drop-shadow-md  mx-[2vw] flex justify-around items-center gap-[1vw] border border-[#3f3838]">
@@ -109,34 +135,20 @@ const MarketPlace = () => {
 
           {/* marketPlace card showing areas */}
           <div className=" w-[100vw] flex justify-evenly items-end ">
-            <div className="  w-[60%] h-[55vh] pt-[10vh] overflow-hidden relative">
+            <div className="  w-[60%] h-[55vh] pt-[10vh] overflow-hidden relative ">
               <div
-                className={`h-[80vh] w-full bg-green-400 overflow-y-scroll scrollbar-hide text-3xl absolute transition-all   ${
+                className={`h-[43vh]  w-full bg-[#0000000a] shadow-inner rounded px-[1%] py-[1%] overflow-y-scroll scrollbar-hide text-3xl absolute transition-all   ${
                   marType === 0 ? "left-[0%]  delay-0" : "left-[100%] delay-100"
                 }  `}
               >
-                All
+                <AllItems />
               </div>
               <div
-                className={`h-[80vh] w-full bg-green-500 overflow-y-scroll scrollbar-hide text-3xl absolute  transition-all ${
+                className={`h-[80vh] w-full bg-green-500 overflow-y-scroll scrollbar-hide text-3xl absolute  z-50 transition-all ${
                   marType === 1 ? "left-[0%] delay-0" : "left-[100%] delay-100"
                 }`}
               >
                 Offline
-              </div>
-              <div
-                className={`h-[80vh] w-full bg-green-600 overflow-y-scroll scrollbar-hide text-3xl absolute transition-all ${
-                  marType === 2 ? "left-[0%] delay-0" : "left-[100%] delay-100"
-                }`}
-              >
-                Amazon
-              </div>
-              <div
-                className={`h-[80vh] w-full bg-green-700 overflow-y-scroll scrollbar-hide text-3xl absolute  transition-all ${
-                  marType === 3 ? "left-[0%] delay-0" : "left-[100%] delay-100"
-                }`}
-              >
-                Flipkart
               </div>
             </div>
 
@@ -146,19 +158,19 @@ const MarketPlace = () => {
                   className={` px-[2%] py-[2%] text-sm absolute  h-[33vh] w-full  transition-transform ${
                     additemCheck
                       ? "translate-x-0"
-                      : " [transform:translate(0%,-100%)]"
+                      : " [transform:translate(0%,-120%)]"
                   } `}
                 >
                   <form
                     onSubmit={addItem}
-                    className=" h-full relative flex flex-col justify-evenly bg-[#2b2b2b27] backdrop-blur-sm px-[2%] py-[2%] rounded-lg font-Montserrat font-semibold"
+                    className=" cursor-pointer h-full relative flex flex-col justify-evenly bg-[#2b2b2b27] backdrop-blur-sm px-[2%] py-[2%] rounded-lg font-Montserrat font-semibold"
                   >
-                    <button
+                    <span
                       className=" absolute z-30 right-[-1%] top-[-3%]"
                       onClick={() => setAdditemCheck(!additemCheck)}
                     >
                       <XSquare className=" hover:rotate-12 transition-all" />
-                    </button>
+                    </span>
                     <div className=" flex flex-col relative">
                       <label htmlFor="name" className=" absolute top-[-70%]">
                         Item Name
@@ -166,7 +178,9 @@ const MarketPlace = () => {
                       <input
                         type="text"
                         id="name"
-                        className=" w-full h-[5vh] border-2 border-[#03030362] rounded-lg px-[1%] font-Montserrat font-semibold focus:outline-none transition-all  hover:border-[#201c1c]"
+                        value={itemName}
+                        onChange={(e) => setItemName(e.target.value)}
+                        className=" w-full h-[5vh] border-2 bg-[#0000002d] border-[#03030362] rounded-lg px-[1%] font-Montserrat font-semibold focus:outline-none focus:bg-[#ffffffaf] transition-all  hover:border-[#201c1c]"
                       />
                     </div>
                     <div className=" flex flex-col relative">
@@ -175,8 +189,9 @@ const MarketPlace = () => {
                       </label>
                       <input
                         type="number"
-                        id=""
-                        className=" w-full h-[5vh] border-2 border-[#03030362] rounded-lg px-[1%] font-Montserrat font-semibold focus:outline-none transition-all  hover:border-[#201c1c]"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        className=" w-full h-[5vh] border-2 bg-[#0000002d] border-[#03030362] rounded-lg px-[1%] font-Montserrat font-semibold focus:outline-none transition-all  hover:border-[#201c1c] focus:bg-[#ffffffaf] "
                       />
                     </div>
                     <div className=" flex flex-col relative">
@@ -185,11 +200,26 @@ const MarketPlace = () => {
                       </label>
                       <input
                         type="number"
-                        id=""
-                        className=" w-full h-[5vh] border-2 border-[#03030362] rounded-lg px-[1%] font-Montserrat font-semibold focus:outline-none transition-all  hover:border-[#201c1c]"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                        className=" w-full h-[5vh] border-2 bg-[#0000002d] border-[#03030362] rounded-lg px-[1%] font-Montserrat font-semibold focus:outline-none transition-all  hover:border-[#201c1c] focus:bg-[#ffffffaf]"
                       />
                     </div>
+                    <input
+                      type="submit"
+                      value="Add Item"
+                      className=" absolute bottom-[-10%] left-[50%] [transform:translate(-50%,-20%)] bg-[#201c1c] text-[#ffffff] rounded-lg px-[5%] py-[1.2%] font-Montserrat font-semibold hover:bg-[#0f0f0f] transition-all cursor-pointer"
+                    />
                   </form>
+                  <div
+                    className={` text-md font-semibold flex bg-[#56ff56] text-[#000000] w-[35%] py-[1vh] rounded-md justify-evenly items-center drop-shadow-lg shadow-inner absolute bottom-[-23%] right-[5%] transition-transform ${
+                      addedPop
+                        ? "[transform:translate(-20%,40%)]"
+                        : "[transform:translate(130%,40%)]"
+                    }`}
+                  >
+                    <CheckSquare2 className=" " size={20} /> Item Added
+                  </div>
                 </div>
                 <div
                   className={`  h-[15%] px-[2%] py-[2%] text-sm  ${
@@ -197,18 +227,26 @@ const MarketPlace = () => {
                   }`}
                 >
                   <button
-                    className=" bg-transparent text-[#292929] border-2 border-[#201c1c] hover:bg-[#0f0f0f28]  transition-all font-Archivo font-semibold w-full h-full rounded-lg "
+                    className={`bg-transparent text-[#292929] border-2 border-[#201c1c] hover:bg-[#0f0f0f28] transition-all font-Archivo font-semibold w-full h-full rounded 
+                    ${additemCheck ? "scale-0" : "hover:backdrop-blur-md"}
+                    `}
                     onClick={() => setAdditemCheck(!additemCheck)}
                   >
                     ADD NEW ITEM
                   </button>
                 </div>
                 <div
-                  className={`absolute bottom-[0vh] bg-pink-300 w-full h-[80%] transition-transform ${
+                  className={`absolute bottom-[0vh] backdrop-blur-md shadow-inner bg-[#00000011] w-full h-[80%] transition-transform overflow-y-scroll scrollbar-hide ${
                     additemCheck ? "[transform:translate(0%,100%)]" : ""
                   } `}
                 >
-                  View Items
+                  <div className="  w-full flex flex-col gap-[1vh] px-[1vw] py-[1.5vh]">
+                    {addedItemList.map((item, index) => {
+                      return (
+                        <ListedItem item={item} index={index} key={index} />
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
