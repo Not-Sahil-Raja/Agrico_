@@ -38,4 +38,13 @@ router.post("/postallusers", async (req, res) => {
   }
 });
 
+router.get("/getuser/:email", async (req, res) => {
+  try {
+    const thismail = req.params.email;
+    const foundmail = await User.findOne({ email: thismail });
+    return res.status(200).json(foundmail);
+  } catch (e) {
+    console.log("Did not receive username : ", e.message);
+  }
+});
 export default router;
