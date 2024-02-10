@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { MoveRight } from "lucide-react";
 import axios from "axios";
+import { userlogin } from "../../Apps/userInfoslice.js";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const Dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(true);
@@ -13,6 +16,7 @@ const Login = () => {
     //need to add the backend code here
     e.preventDefault();
     console.log(email, password);
+    Dispatch(userlogin({ username: password, email: email }));
     setEmail("");
     setPassword("");
   };
