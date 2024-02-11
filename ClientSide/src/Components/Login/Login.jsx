@@ -12,17 +12,52 @@ const Login = () => {
   const [userName, setUserName] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [mailchk, setMailchk] = useState(false);
+  const [popstyle, setPopstyle] = useState(
+    "absolute bg-black opacity-0 bottom-2 right-2 p-2 h-fit w-fit"
+  );
+  const [poptext, setPoptext] = useState("");
+  const [logintext, setLogintext] = useState("Welcome Back");
+  const [welstyle, setWelstyle] = useState(
+    " absolute text-[5vw] top-1/2 left-1/2 text-[#ffffff] [transform:translate(-50%,-240%)] whitespace-nowrap  font-Archivo font-semibold transition-transform"
+  );
+  const [hellostyle, setHellostyle] = useState(
+    " absolute text-[5vw] top-1/2 left-1/2 text-[#ffffff] [transform:translate(-50%,-100%)] whitespace-nowrap  font-Archivo font-semibold opacity-0 transition-transform"
+  );
 
   const loginCheck = (e) => {
     e.preventDefault();
 
     axios.get(`http://localhost:3000/getuser/${email}`).then((res) => {
       if (!res.data) {
-        console.log("Email not Found"); //email not found
+        setPopstyle(
+          "absolute bg-red-500 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl transition-opacity"
+        );
+        setPoptext("Email not Found"); //email not found
+        setTimeout(() => {
+          setPopstyle(
+            "absolute bg-red-500 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl opacity-0 transition-opacity"
+          );
+        }, 2000);
       } else if (res.data.password != password) {
-        console.log("Wrong password"); //wrong pass
+        setPopstyle(
+          "absolute bg-red-500 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl transition-opacity"
+        );
+        setPoptext("Wrong Password"); //wrong pass
+        setTimeout(() => {
+          setPopstyle(
+            "absolute bg-red-500 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl opacity-0 transition-opacity"
+          );
+        }, 2000);
       } else {
-        console.log("Logged In", res.data.username); //logged in
+        setPopstyle(
+          "absolute bg-green-700 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl transition-opacity"
+        );
+        setPoptext("Logged In"); //logged in
+        setTimeout(() => {
+          setPopstyle(
+            "absolute bg-green-500 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl opacity-0 transition-opacity"
+          );
+        }, 2000);
         Dispatch(
           userlogin({
             username: password,
@@ -62,6 +97,15 @@ const Login = () => {
             show: userName,
           })
         );
+        setPopstyle(
+          "absolute bg-green-700 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl transition-opacity"
+        );
+        setPoptext("Registered Successfully"); //registered succesfully
+        setTimeout(() => {
+          setPopstyle(
+            "absolute bg-green-500 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl opacity-0 transition-opacity"
+          );
+        }, 2000);
       })
       .catch((e) => {
         console.log("Unable to post", e);
@@ -72,9 +116,16 @@ const Login = () => {
     if (email != "" && login == false) {
       axios.get(`http://localhost:3000/checkmail/${email}`).then((res) => {
         if (!res.data) {
+          setPopstyle(
+            "absolute bg-red-700 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl opacity-0 transition-opacity"
+          );
           setMailchk(false);
           console.log("Email does NOT EXIST"); //email not exixts
         } else {
+          setPopstyle(
+            "absolute bg-red-700 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl transition-opacity"
+          );
+          setPoptext("Email already Exists");
           console.log("Email already EXISTS"); //email already exists
           setMailchk(true);
         }
@@ -102,7 +153,26 @@ const Login = () => {
               </span>
               <span
                 className=" flex gap-2 justify-center items-center border-b border-b-[black] cursor-pointer font-Montserrat font-semibold"
-                onClick={() => setLogin(!login)}
+                onClick={() => {
+                  if (logintext == "Welcome Back") {
+                    setWelstyle(
+                      "absolute text-[5vw] top-1/2 left-1/2 text-[#ffffff] [transform:translate(-50%,-500%)] whitespace-nowrap  font-Archivo font-semibold transition-transform opacity-0"
+                    );
+                    setLogintext("Hello User");
+                    setHellostyle(
+                      "absolute text-[5vw] top-1/2 left-1/2 text-[#ffffff] [transform:translate(-50%,-260%)] whitespace-nowrap  font-Archivo font-semibold transition-transform opacity-100"
+                    );
+                  } else {
+                    setHellostyle(
+                      "absolute text-[5vw] top-1/2 left-1/2 text-[#ffffff] [transform:translate(-50%,-100%)] whitespace-nowrap  font-Archivo font-semibold transition-transform opacity-0"
+                    );
+                    setLogintext("Welcome Back");
+                    setWelstyle(
+                      "absolute text-[5vw] top-1/2 left-1/2 text-[#ffffff] [transform:translate(-50%,-240%)] whitespace-nowrap  font-Archivo font-semibold transition-transform opacity-100"
+                    );
+                  }
+                  setLogin(!login);
+                }}
               >
                 {login ? <>Create account </> : <>Login</>}
                 <MoveRight
@@ -123,9 +193,8 @@ const Login = () => {
                 />
               </div>
 
-              <div className=" absolute text-[5vw] top-1/2 left-1/2 text-[#ffffffc2] [transform:translate(-50%,-240%)] whitespace-nowrap  font-Archivo font-semibold">
-                Welcome Back.
-              </div>
+              <div className={welstyle}>{logintext}</div>
+              <div className={hellostyle}>{logintext}</div>
               <div
                 className={` z-20 bg-[#ffffffdc] absolute top-1/2 left-1/2 w-[19vw] h-[45vh] rotate-45 lg:rounded-md font-Montserrat  transition-transform
                  ${
@@ -244,6 +313,7 @@ const Login = () => {
                   </div>
                 </form>
               </div>
+              <div className={popstyle}>{poptext}</div>
             </div>
           </div>
         </div>
