@@ -11,6 +11,7 @@ const Login = () => {
   const [login, setLogin] = useState(true);
   const [userName, setUserName] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
+  const [mailchk, setMailchk] = useState(false);
 
   const loginCheck = (e) => {
     e.preventDefault();
@@ -49,11 +50,18 @@ const Login = () => {
     axios
       .post("http://localhost:3000/postallusers", userdata)
       .then(() => {
+        console.log(userName, email, phoneNo, password);
         setUserName("");
         setEmail("");
         setPhoneNo("");
         setPassword("");
-        console.log(userName, email, phoneNo, password);
+        Dispatch(
+          userlogin({
+            username: password,
+            email: email,
+            show: userName,
+          })
+        );
       })
       .catch((e) => {
         console.log("Unable to post", e);
@@ -64,9 +72,11 @@ const Login = () => {
     if (email != "" && login == false) {
       axios.get(`http://localhost:3000/checkmail/${email}`).then((res) => {
         if (!res.data) {
-          console.log("Email does NOT EXIST");
+          setMailchk(false);
+          console.log("Email does NOT EXIST"); //email not exixts
         } else {
-          console.log("Email already EXISTS");
+          console.log("Email already EXISTS"); //email already exists
+          setMailchk(true);
         }
       });
     }
@@ -229,6 +239,7 @@ const Login = () => {
                       type="submit"
                       value="Register"
                       className=" bg-[#000000] text-[#fffff2] py-2 rounded cursor-pointer hover:bg-[#0f110f] transition-all duration-300 ease-in-out hover:shadow-inner focus:outline-none"
+                      disabled={mailchk}
                     />
                   </div>
                 </form>
