@@ -1,4 +1,3 @@
-## Bruh
+## Hackfest (Team Cypher)
 
-first
-second
+### [Github Link (For App)](https://github.com/sambitskr/Agriculture-App)
