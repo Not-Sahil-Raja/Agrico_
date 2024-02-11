@@ -29,23 +29,31 @@ const Homepage = () => {
         scale: 0,
       });
 
-      t3.from("#abt", {
-        y: -200,
-        zIndex: -2,
+      t3.from(["#abttxt1", "#abttxt2", "#abttxthigh"], {
+        xPercent: "-200",
+        opacity: 0,
         duration: 0.8,
       })
-        .from("#cname", {
+        .from("#abtright", {
+          xPercent: "200",
           opacity: 0,
           duration: 0.5,
         })
-        .from("#info", {
-          xPercent: "-200",
-          duration: 0.3,
-        })
-        .from("#abtpic", {
+        .from("#card1", {
           opacity: 0,
           duration: 0.5,
-          stagger: 0.3,
+        })
+        .from("#card2", {
+          opacity: 0,
+          duration: 0.5,
+        })
+        .from("#card3", {
+          opacity: 0,
+          duration: 0.5,
+        })
+        .from("#card4", {
+          opacity: 0,
+          duration: 0.5,
         });
 
       ScrollTrigger.create({
