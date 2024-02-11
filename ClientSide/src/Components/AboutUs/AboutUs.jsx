@@ -3,7 +3,7 @@ import React from "react";
 function AboutUs() {
   return (
     <>
-      <section className="w-screen bg-orange-200 grid h-screen place-items-center">
+      <section className="w-screen bg-[#fffff2] grid h-screen place-items-center">
         <div className="flex flex-1 justify-start items-center flex-col gap-6">
           <h5 className="font-bold text-lime-950 text-4xl" id="abt">
             About Us
