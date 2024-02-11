@@ -3,8 +3,10 @@ import { MoveRight } from "lucide-react";
 import axios from "axios";
 import { userlogin } from "../../Apps/userInfoslice.js";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const Dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,6 +59,7 @@ const Login = () => {
           setPopstyle(
             "absolute bg-green-500 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl opacity-0 transition-opacity"
           );
+          navigate("/");
         }, 2000);
         Dispatch(
           userlogin({
@@ -105,6 +108,8 @@ const Login = () => {
           setPopstyle(
             "absolute bg-green-500 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl opacity-0 transition-opacity"
           );
+          navigate("/");
+          n;
         }, 2000);
       })
       .catch((e) => {

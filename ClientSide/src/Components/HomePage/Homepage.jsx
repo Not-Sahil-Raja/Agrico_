@@ -3,9 +3,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AboutUs from "../AboutUs/AboutUs";
 import ContactUs from "../ContactUs/ContactUs";
+import { useNavigate } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 const Homepage = () => {
+  const navigate = useNavigate();
   const p1 = useRef(null);
   const p2 = useRef(null);
   const p3 = useRef(null);
@@ -119,7 +121,12 @@ const Homepage = () => {
               className="relative inline-flex items-center justify-center p-4 px-[4vw] py-[2vh] overflow-hidden font-medium text-white transition duration-300 ease-out border-2 border-black shadow-md group text-3xl whitespace-nowrap"
               id="btun"
             >
-              <span className="absolute inset-0 flex items-center justify-center w-full h-full text-black duration-300 -translate-x-full bg-white group-hover:translate-x-0 ease">
+              <span
+                className="absolute inset-0 flex items-center justify-center w-full h-full text-black duration-300 -translate-x-full bg-white group-hover:translate-x-0 ease"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
                 <svg
                   className="w-7 h-7"
                   fill="none"
