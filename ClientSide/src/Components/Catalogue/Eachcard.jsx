@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 const Eachcard = () => {
   const location = useLocation();
   return (
-    <div className=" bg-[#fffff2] w-full h-[100vh] pt-[9vh] select-none">
+    <div className=" bg-[#fffff2] w-full h-[100vh] pt-[10vh] select-none">
       <div className="bg-lightYellow h-fit w-[95%] m-auto rounded-3xl border-black  border-[1px] flex-col justify-center items-center">
         <div className="bg-black h-[9vh] w-[60%] text-white text-center text-5xl mt-2 rounded-3xl mx-auto">
           Category {location.state.name}
@@ -30,6 +30,7 @@ const Eachcard = () => {
           </div>
         </div>
       </div>
+      <div className="h-[5vh]"></div>
     </div>
   );
 };
