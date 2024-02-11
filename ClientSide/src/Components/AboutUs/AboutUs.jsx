@@ -16,23 +16,25 @@ function AboutUs() {
     {/* <div className='bg-red-900 basis-[45%] text-white'>hello</div>
     <div className='bg-lime-800 basis-[55%] text-white'>hi</div>
    */}
-      <section className="w-screen bg-orange-200 mt-10 grid h-screen place-items-center">
+      <section className="w-screen bg-orange-200 grid h-screen place-items-center">
         <div className="flex flex-1 justify-start items-center flex-col gap-6">
           <h5 className="font-bold text-lime-950 text-4xl"> About Us</h5>
-          <p className=" text-2xl upppercase font-light text-lime-900"> NAME</p>
+          <p className=" text-3xl upppercase font-bold text-lime-900">AgriCo</p>
           <p className="w-3/5 text-center text-2xl text-teal-950">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis optio
-            reprehenderit nulla ex tenetur quasi debitis dolorem magnam
-            explicabo eveniet sequi quae hic earum eaque accusamus molestiae,
-            eligendi incidunt! Vero. Ipsa, distinctio debitis quas sequi laborum
-            explicabo quaerat officia libero quia, quisquam corporis voluptate
-            est aut! Quis, iste voluptatem omnis quae ipsum magni officiis iusto
-            expedita quod corporis illum? Necessitatibus.
+            The Farmer Education Platform with Farmer Marketplace is a
+            comprehensive online platform designed to empower farmers with
+            knowledge and resources while providing a convenient marketplace for
+            them to buy and sell agricultural products, equipment, and services.
+            Through interactive tutorials, articles, and tools, farmers can
+            enhance their skills and stay updated on the latest farming
+            techniques and market trends. The marketplace facilitates
+            transactions between farmers, buyers, and sellers, fostering
+            collaboration and economic growth within the agricultural community.
           </p>
 
           <div className="w-1/4 bg-orange-200 flex  justify-center items-center gap-6">
             <img
-              src="https://media.istockphoto.com/id/1326948783/photo/smart-young-farmers-use-tablets-to-manage-their-farms-and-use-technology-to-reduce-work-time.jpg?s=1024x1024&w=is&k=20&c=dz5y9FQB7WjaiM1l4-PA5hao5xmCMNEFe_zDdxQ5pW0="
+              src="https://images.unsplash.com/photo-1580982169321-36e1ad95adba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Img1"
             />
 
