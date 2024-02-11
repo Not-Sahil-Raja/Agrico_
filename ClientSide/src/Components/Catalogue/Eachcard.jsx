@@ -26,7 +26,7 @@ const Eachcard = () => {
             Numquam laboriosam eveniet voluptas.
           </div>
           <div className="w-[40%] h-[35vh] text-xl border-black rounded-xl border-[1px] p-4">
-            Interactive Tools bolte Ki debo?? <br /> DILDO
+            Interactive Tools bolte Ki debo??
           </div>
         </div>
       </div>
