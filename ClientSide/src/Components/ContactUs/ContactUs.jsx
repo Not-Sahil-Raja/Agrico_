@@ -21,21 +21,34 @@ const ContactUs = () => {
         <img
           className="absolute object-cover h-[80vh] w-[100%] brightness-50"
           src="https://images.unsplash.com/photo-1468253926858-331ac6e1e97f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          id="conimg"
         ></img>
         <div className="h-[80vh] w-[100vh] z-10 absolute">
-          <div className="absolute top-6 left-8 text-3xl font-semibold text-white">
+          <div
+            className="absolute top-6 left-8 text-3xl font-semibold text-white"
+            id="contop"
+          >
             AgriCo
           </div>
-          <div className="absolute left-[20vh] top-[50%] [transform:translateY(-50%)] text-white font-bold text-6xl">
+          <div
+            className="absolute left-[20vh] top-[50%] [transform:translateY(-50%)] text-white font-bold text-6xl"
+            id="contxt"
+          >
             Have some suggestions?
             <br />
             We would love to listen
           </div>
-          <div className="absolute bottom-6 left-8 text-xl font-semibold text-white">
-            agrico@gmail.com
+          <div
+            className="absolute bottom-6 left-8 text-xl font-semibold text-white"
+            id="conmail"
+          >
+            agrico2024@gmail.com
           </div>
         </div>
-        <div className="absolute right-24 bg-[#ffdaaa7a] backdrop-blur-md h-[70vh] w-[55vh] rounded-md flex flex-col gap-10 justify-center items-center  ">
+        <div
+          className="absolute right-24 bg-[#ffdaaa7a] backdrop-blur-md h-[70vh] w-[55vh] rounded-md flex flex-col gap-10 justify-center items-center  "
+          id="conform"
+        >
           <input
             className="h-12 w-[90%] px-4 border-b-2 border-black bg-transparent text-black focus:outline-none focus:placeholder-transparent placeholder:text-black placeholder:font-semibold"
             placeholder="Your name"
@@ -51,6 +64,7 @@ const ContactUs = () => {
           <button
             onClick={clicked}
             className="h-12 w-40 border-black border-2 rounded-3xl font-bold hover:bg-black hover:text-white transition-colors"
+            id="consub"
           >
             Send Feedback
           </button>
