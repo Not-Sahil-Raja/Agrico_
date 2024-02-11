@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import users from "./routes/users.route.js";
 import items from "./routes/items.route.js";
+import courses from "./routes/courses.route.js";
 
 dotenv.config({
   path: "../env",
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/", users);
 app.use("/", items);
+app.use("/", courses);
 
 connectDB()
   .then(() => {

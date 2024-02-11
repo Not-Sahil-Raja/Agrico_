@@ -10,7 +10,9 @@ function Item(props) {
         " flex items-end justify-center w-[20%] h-[30%] rounded-xl cursor-pointer bg-cover bg-no-repeat text-black font-bold text-lg overflow-hidden flex-row relative hover:text-xl hover:text-white hover:items-center hover:shadow-lg hover:shadow-black"
       }
       onClick={() => {
-        navigate("/demo", { state: { name: props.cat } });
+        navigate("/demo", {
+          state: { name: props.cat, no: props.no, back: props.back },
+        });
       }}
     >
       <div className=" bg-black z-10 w-full h-full absolute opacity-0 hover:opacity-50"></div>
