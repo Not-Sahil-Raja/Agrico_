@@ -6,6 +6,7 @@ function Item(props) {
   const navigate = useNavigate();
   return (
     <div
+      id="itm"
       className={
         " flex items-end justify-center h-full rounded-xl cursor-pointer  overflow-hidden flex-row relative drop-shadow-md font-Archivo"
       }
