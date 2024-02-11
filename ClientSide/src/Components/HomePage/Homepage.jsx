@@ -1,6 +1,8 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import AboutUs from "../AboutUs/AboutUs";
+import ContactUs from "../ContactUs/ContactUs";
 gsap.registerPlugin(ScrollTrigger);
 
 const Homepage = () => {
@@ -11,6 +13,8 @@ const Homepage = () => {
     let ctx = gsap.context(() => {
       const t1 = gsap.timeline();
       const t2 = gsap.timeline();
+      const t3 = gsap.timeline();
+
       t1.from("#txt", {
         xPercent: "-200",
         duration: 0.6,
@@ -21,14 +25,42 @@ const Homepage = () => {
         duration: 0.8,
         scale: 0,
       });
+
+      t3.from("#abt", {
+        y: -200,
+        zIndex: -2,
+        duration: 1,
+      })
+        .from("#cname", {
+          opacity: 0,
+          duration: 0.8,
+        })
+        .from("#info", {
+          xPercent: "-200",
+          duration: 0.8,
+        })
+        .from("#abtpic", {
+          opacity: 0,
+          duration: 0.8,
+          stagger: 2,
+        });
+
+      ScrollTrigger.create({
+        trigger: p2.current,
+        start: "top 70%",
+        end: "bottom 20%",
+        animation: t3,
+        markers: true,
+        toggleActions: "play pause resume reverse",
+      });
     }, p1);
     return () => ctx.revert();
   }, []);
 
   return (
     <>
-      <div className=" overflow-hidden h-[100vh] w-[100vw] bg-black " ref={p1}>
-        <div className=" h-full  overflow-auto scrollbar-hide  scroll-smooth relative">
+      <div className=" overflow-hidden h-[300vh] w-[100vw] bg-black " ref={p1}>
+        <div className=" h-[100vh]  scrollbar-hide relative">
           <div className="w-full h-full absolute z-10 bg-gradient-to-b from-[#4e9c0e] to-[#224b01] opacity-65"></div>
           <img
             src="https://images.unsplash.com/photo-1469122312224-c5846569feb1?q=80&w=1978&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -70,12 +102,15 @@ const Homepage = () => {
               <span class="relative invisible">Button Text</span>
             </button>
           </div>
-
-          <div className="h-[100vh] w-[100vw] bg-white">
-            lawraaaaaaaaaaaaaaaaaa
+        </div>
+        <div className="h-[100vh] w-[100vw] bg-white relative" ref={p2}>
+          <div className="bg-pink-500 z-50">
+            <AboutUs />
           </div>
         </div>
-        <div className="h-full w-full bg-black">lawra</div>
+        <div className="h-[100vh] w-[100vw] bg-white relative">
+          <ContactUs />
+        </div>
       </div>
     </>
   );
