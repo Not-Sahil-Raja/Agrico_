@@ -12,6 +12,7 @@ import Login from "./Components/Login/Login.jsx";
 import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 import { store } from "./Apps/store.js";
 import { Provider } from "react-redux";
+import Eachcard from "./Components/Catalogue/Eachcard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/marketPlace",
         element: <MarketPlace />,
+      },
+      {
+        path: "/demo",
+        element: <Eachcard />,
       },
     ],
   },

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Eachcard = () => {
+const Eachcard = (props) => {
   return (
     <div className=" bg-[#fffff2] w-full h-[100vh] pt-[9vh] select-none">
       <div className="bg-lightYellow h-fit w-[95%] m-auto rounded-3xl border-black  border-[1px] flex-col justify-center items-center">

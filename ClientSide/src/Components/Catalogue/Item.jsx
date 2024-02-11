@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Item(props) {
   return (
@@ -9,7 +10,9 @@ function Item(props) {
     >
       <div className=" bg-black z-10 w-full h-full absolute opacity-0 hover:opacity-50"></div>
       <img src={props.back} alt="" className="absolute z-0" />
-      <div className=" z-20">Catagory {props.cat} </div>
+      <NavLink to="/demo" msg={"LOL"} className=" z-20">
+        Catagory {props.cat}{" "}
+      </NavLink>
     </div>
   );
 }
