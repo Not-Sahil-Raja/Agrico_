@@ -39,12 +39,12 @@ function AboutUs() {
             />
 
             <img
-              src="https://media.istockphoto.com/id/1412751945/photo/female-farmer-is-holding-a-digital-tablet-in-a-farm-field-smart-farming.jpg?s=1024x1024&w=is&k=20&c=k1LtRRckg8p-ZGEoZb2QB15SlqQxx3Itwp1Xd3-FJzY="
+              src="https://images.unsplash.com/photo-1606739211185-2c846d734a6d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Img2"
             />
 
             <img
-              src="https://media.istockphoto.com/id/1255872192/photo/smart-farming-with-iot-futuristic-agriculture-concept.jpg?s=1024x1024&w=is&k=20&c=jK8ir1KXl8oaTxVJ-hGvatRqiRSD8ePaI-3a0V2CDl0="
+              src="https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Img3"
             />
           </div>
