@@ -5,6 +5,7 @@ import { addToCart } from "../../Apps/cartSlice.js";
 
 const ItemCard = ({ item }) => {
   const Dispatch = useDispatch();
+  item = { ...item, cartadd: false };
   const addCartItem = () => {
     Dispatch(addToCart(item));
     console.log("Added to Cart", item._id);
