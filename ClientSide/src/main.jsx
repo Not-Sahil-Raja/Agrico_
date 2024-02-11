@@ -13,6 +13,7 @@ import ContactUs from "./Components/ContactUs/ContactUs.jsx";
 import { store } from "./Apps/store.js";
 import { Provider } from "react-redux";
 import Cart from "./Components/Cart/Cart.jsx";
+import Eachcard from "./Components/Catalogue/Eachcard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/demo",
+        element: <Eachcard />,
       },
     ],
   },
