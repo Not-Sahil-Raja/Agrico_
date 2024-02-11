@@ -2,65 +2,99 @@ import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { CheckCircle2, ChevronDown } from "lucide-react";
 
 const Eachcard = () => {
   const location = useLocation();
   const [info, setInfo] = useState({});
   const [arr, setArr] = useState([]);
-  console.log(location.state.no);
+  // console.log(location.state.no);
   useEffect(() => {
     axios
       .get(`http://localhost:3000/courses/${location.state.no}`)
       .then((res) => {
         setInfo(res.data);
-        console.log(info);
       });
-  }, [arr]);
-
+  }, []);
+  // console.log(location.state.name);
   return (
-    <div className=" bg-[#fffff2] w-full h-[100vh] pt-[10vh] select-none">
-      <div className="bg-lightYellow h-fit w-[95%] m-auto rounded-3xl border-black  border-[1px] flex-col justify-center items-center">
-        <div className="bg-black h-fit p-4 w-[80%] text-white text-center text-5xl mt-2 rounded-3xl mx-auto">
-          {location.state.name}
+    <div className=" bg-[#fffff2] w-full h-[100vh] select-none overflow-hidden">
+      <div className=" w-full h-[90%] mt-[10vh] px-[1vw] py-[2vh] flex flex-evenly">
+        <div className=" flex-1">
+          {/* left side */}
+          <div className=" h-full  mx-[1vw] flex flex-col px-[1vw] py-[2vh] gap-[2vh] overflow-y-scroll scrollbar-hide">
+            <div className=" w-full h-[11%] flex border-[.1rem] bg-[#00000007] shadow-inner border-[#2929294f] px-[.5vw] rounded-xl justify-evenly items-center overflow-hidden">
+              <div className="  w-[25%] h-full flex items-center justify-center">
+                <CheckCircle2
+                  size={36}
+                  className=" drop-shadow-md rounded-full "
+                  color="#fda744"
+                />
+              </div>
+              <div className=" w-[65%] h-full  flex flex-col py-[1vh] justify-evenly font-Archivo px-[.5vw]">
+                <span className=" text-sm flex items-end">Get Started</span>
+                <span className=" text-lg font-semibold ">Introduction</span>
+              </div>
+              <div className=" w-[10%] h-full  flex justify-center items-center">
+                <ChevronDown />
+              </div>
+            </div>
+          </div>
         </div>
-        <br />
-        <div className="flex gap-6 h-fit p-6">
-          <div className="w-[40%] h-[35vh] text-xl border-black rounded-xl border-[1px] p-4">
-            GRAPH
-          </div>
-          <div className="w-[60%] border-black rounded-xl overflow-hidden h-[50vh] relative">
-            <Link
-              to="https://www.youtube.com/watch?v=zL19uMsnpSU"
-              className="absolute z-10 text-2xl bottom-2 right-2 bg-[#000000a5] py-2 px-6 rounded-xl text-white underline hover:text-blue-500"
-              target="_blank"
-            >
-              Watch full video on Youtube
-            </Link>
-            <img
-              src={location.state.back}
-              className="h-full w-full absolute"
-            ></img>
+        <div className=" flex-[2.5] px-[1vw] py-[2vh]">
+          {/* middle area */}
+          <div className=" w-full h-full px-[2vw] py-[2vh] flex flex-col gap-[5vh]">
+            <div className=" w-full h-[75%] bg-red-200 rounded-xl">
+              <iframe
+                src={info.link}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                className=" w-full h-full rounded-xl"
+              />
+            </div>
+            <div className=" w-full h-[20%] border-[#2929294f] border flex justify-center items-center rounded-lg">
+              <span className=" text-xl font-Archivo font-semibold">
+                Join Community
+              </span>
+            </div>
           </div>
         </div>
-        <div className="flex gap-6 h-fit p-6">
-          <div className="w-[60%] h-[50vh] text-xl border-black rounded-xl border-[1px] p-4 overflow-y-scroll scrollbar-hide bg-white">
-            {info.data}
-            <br />
-            <br />
-            {info.point1}
-            <br />
-            <br />
-            {info.point2}
-            <br />
-            <br />
-            {info.point3}
+
+        {/* right side */}
+        <div className=" flex-1  h-full py-[4.5vh] px-[1vw] flex flex-col">
+          <div className=" h-[30%] text-sm  font-Archivo  w-full border-[#2929294f] border rounded-lg mb-[3vh] flex flex-col px-[1vw] py-[2vh]">
+            <div className=" flex-1 flex">
+              <span className=" font-semibold">Lecture Type</span>
+              <span className=" ml-auto pr-[.5vw]">Pre recorded</span>
+            </div>
+            <div className=" flex-1 flex">
+              <span className=" font-semibold">Skills Levels</span>
+              <span className=" ml-auto pr-[.5vw]">Beginner</span>
+            </div>
+            <div className=" flex-1 flex">
+              <span className=" font-semibold">Duration</span>
+              <span className=" ml-auto pr-[.5vw]">16 Hours</span>
+            </div>
+            <div className=" flex-1 flex">
+              <span className=" font-semibold">Critique Session</span>
+              <span className=" ml-auto pr-[.5vw]">Once a Week</span>
+            </div>
           </div>
-          <div className="w-[40%] h-[35vh] text-xl border-black rounded-xl border-[1px] p-4">
-            Interactive Tools bolte Ki debo??
+          <div className=" h-[70%] border-[#2929294f] border rounded-lg  py-[1vh] w-full">
+            <div className=" px-[1.5vw] font-semibold border-b border-b-[#2929294f] h-[10%] pb-[.5vh] w-full">
+              Overview
+            </div>
+            <div className=" px-[1.5vw] font-semibold text-xl font-Archivo bg-[#ffffffab] shadow-inner py-[1vh] h-[20%] flex justify-center items-center">
+              {location.state.name}
+            </div>
+            <div>
+              <div className=" px-[1.5vw] py-[1.5vh] font-Archivo text-[#292929] h-[34.5vh] text-sm text-ellipsis overflow-hidden">
+                {info.data}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="h-[5vh]"></div>
     </div>
   );
 };

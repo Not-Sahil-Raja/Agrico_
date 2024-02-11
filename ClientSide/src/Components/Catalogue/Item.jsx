@@ -7,7 +7,7 @@ function Item(props) {
   return (
     <div
       className={
-        " flex items-end justify-center w-[20%] h-[30%] rounded-xl cursor-pointer bg-cover bg-no-repeat text-black font-bold text-lg overflow-hidden flex-row relative hover:text-xl hover:text-white hover:items-center hover:shadow-lg hover:shadow-black"
+        " flex items-end justify-center h-full rounded-xl cursor-pointer  overflow-hidden flex-row relative drop-shadow-md font-Archivo"
       }
       onClick={() => {
         navigate("/demo", {
@@ -15,11 +15,18 @@ function Item(props) {
         });
       }}
     >
-      <div className=" bg-black z-10 w-full h-full absolute opacity-0 hover:opacity-50"></div>
-      <img src={props.back} alt="" className="absolute z-0" />
-      <div className=" z-20 text-center">{props.cat}</div>
+      <img
+        src={props.back}
+        alt={props.cat}
+        className="absolute z-0 transition-all scale-105 hover:scale-100 hover:brightness-50 duration-200"
+      />
+      <div className=" z-20 text-center bg-[#0000007e] w-full py-[.5vh] rounded ">
+        {props.cat}
+      </div>
     </div>
   );
 }
 
 export default Item;
+
+// bg-gradient-to-t from-black via-lightOrange to-extralightYellow

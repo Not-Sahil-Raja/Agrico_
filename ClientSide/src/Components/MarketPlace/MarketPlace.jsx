@@ -97,7 +97,7 @@ const MarketPlace = () => {
             </div>
           </div>
         </div>
-        <button onClick={() => localStorage.clear()}>awd</button>
+
         {/* marketPlace */}
         <div className="  relative overflow-y-scroll h-[60vh] scrollbar-hide px-[1vw] py-[2vh]">
           <div className=" absolute w-[92vw] left-[4%] py-[1vh] z-40  flex items-center backdrop-blur-md rounded-3xl">
