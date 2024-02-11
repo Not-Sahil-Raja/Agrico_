@@ -54,42 +54,54 @@ const ContactUs = () => {
         </div>
         <form
           onSubmit={clicked}
-          className="absolute right-24 bg-[#ffdaaa7a] backdrop-blur-md h-[70vh] w-[55vh] rounded-md flex flex-col gap-10 justify-center items-center  "
+          className="absolute right-24 bg-[#ebd7bda2] backdrop-blur-md h-[70vh] w-[55vh] rounded-md flex flex-col  justify-evenly items-center  "
           id="conform"
         >
-          <input
-            className="h-12 w-[90%] px-4 border-b-2 border-black bg-transparent text-black focus:outline-none focus:placeholder-transparent placeholder:text-black placeholder:font-semibold"
-            placeholder="Your name"
-            value={m1}
-            onChange={(e) => {
-              setM1(e.target.value);
-            }}
-            required:true
-          />
-          <input
-            className="h-12 px-4 w-[90%] border-b-2 border-black bg-transparent text-black focus:outline-none focus:placeholder-transparent placeholder:text-black placeholder:font-semibold"
-            placeholder="Your email"
-            value={m2}
-            onChange={(e) => {
-              setM2(e.target.value);
-            }}
-            required:true
-          />
-          <input
-            className="h-12 px-4 w-[90%] border-b-2 border-black bg-transparent text-black focus:outline-none focus:placeholder-transparent placeholder:text-black placeholder:font-semibold"
-            placeholder="Tell us what you think"
-            value={m3}
-            onChange={(e) => {
-              setM3(e.target.value);
-            }}
-            required:true
-          />
-          <input
-            type="submit"
-            className="h-12 w-40 border-black border-2 rounded-3xl font-bold hover:bg-black hover:text-white transition-colors"
-            id="consub"
-            value="Send Feedback"
-          />
+          <div className=" w-full h-[50%] px-[2vw] flex flex-col gap-[4vh] font-Archivo">
+            <div className="h-1/3 w-full  px-[1vw]">
+              <span className=" font-semibold">Your name</span>
+              <input
+                className=" w-full  border-b-2 border-black bg-transparent text-black focus:outline-none focus:placeholder-transparent focus:bg-[#00000028] placeholder:text-black placeholder:font-semibold"
+                value={m1}
+                onChange={(e) => {
+                  setM1(e.target.value);
+                }}
+                required:true
+              />
+            </div>
+            <div className="h-1/3 w-full  px-[1vw]">
+              <span className=" font-semibold">Your email</span>
+              <input
+                className=" w-full border-b-2 border-black bg-transparent text-black focus:outline-none focus:placeholder-transparent focus:bg-[#00000028] placeholder:text-black placeholder:font-semibold"
+                value={m2}
+                onChange={(e) => {
+                  setM2(e.target.value);
+                }}
+                required:true
+              />
+            </div>
+            <div className="h-1/3 w-full  px-[1vw]">
+              <span className=" font-semibold">Tell us what you think</span>
+              <input
+                className="  w-full border-b-2 border-black bg-transparent text-black focus:outline-none focus:placeholder-transparent focus:bg-[#00000028] placeholder:text-black placeholder:font-semibold"
+                value={m3}
+                type="description"
+                onChange={(e) => {
+                  setM3(e.target.value);
+                }}
+                required:true
+              />
+            </div>
+          </div>
+
+          <div className=" h-[10%]  w-full flex justify-center items-center">
+            <input
+              type="submit"
+              className="h-[5vh] cursor-pointer w-[50%] font-Archivo border-black border-2 rounded-3xl font-bold hover:bg-black hover:text-white transition-colors"
+              id="consub"
+              value="Send Feedback"
+            />
+          </div>
         </form>
         <div className={popstyle}>Feedback Sent</div>
       </div>
