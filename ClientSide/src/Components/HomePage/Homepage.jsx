@@ -23,7 +23,7 @@ const Homepage = () => {
       });
       t2.from("#btun", {
         xPercent: "800",
-        duration: 0.8,
+        duration: 0.5,
         scale: 0,
       });
 
@@ -34,15 +34,15 @@ const Homepage = () => {
       })
         .from("#cname", {
           opacity: 0,
-          duration: 0.8,
+          duration: 0.5,
         })
         .from("#info", {
           xPercent: "-200",
-          duration: 0.8,
+          duration: 0.3,
         })
         .from("#abtpic", {
           opacity: 0,
-          duration: 0.8,
+          duration: 0.5,
           stagger: 0.3,
         });
 
@@ -57,27 +57,27 @@ const Homepage = () => {
 
       t4.from("#conimg", {
         opacity: 0,
-        duration: 0.8,
+        duration: 0.3,
         delay: 0.5,
       })
         .from("#contop", {
           yPercent: "-200",
           opacity: 0,
-          duration: 0.8,
+          duration: 0.5,
         })
         .from("#contxt", {
           xPercent: "-200",
           opacity: 0,
-          duration: 0.8,
+          duration: 0.4,
         })
         .from("#conform", {
           xPercent: "200",
           opacity: 0,
-          duration: 0.8,
+          duration: 0.4,
         })
         .from("#consub", {
           opacity: 0,
-          duration: 0.8,
+          duration: 0.6,
         })
         .from("#conmail", {
           yPercent: "200",
