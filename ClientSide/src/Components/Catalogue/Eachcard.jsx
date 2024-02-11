@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
@@ -6,13 +6,16 @@ import { useState } from "react";
 const Eachcard = () => {
   const location = useLocation();
   const [info, setInfo] = useState({});
+  const [arr, setArr] = useState([]);
   console.log(location.state.no);
-  axios
-    .get(`http://localhost:3000/courses/${location.state.no}`)
-    .then((res) => {
-      setInfo(res.data);
-      console.log(info);
-    });
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/courses/${location.state.no}`)
+      .then((res) => {
+        setInfo(res.data);
+        console.log(info);
+      });
+  }, [arr]);
 
   return (
     <div className=" bg-[#fffff2] w-full h-[100vh] pt-[10vh] select-none">
