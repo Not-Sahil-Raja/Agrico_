@@ -10,7 +10,6 @@ const AllItems = () => {
     axios
       .get("http://localhost:3000/itemsList")
       .then((res) => {
-        console.log(res.data);
         setItemList(res.data);
       })
       .catch((err) => {

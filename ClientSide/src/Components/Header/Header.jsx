@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   const userDet = useSelector((state) => state.userInfo.userInfo);
-  console.log(userDet);
+  // console.log(userDet);
   return (
     <div className="  mt-[.75vh]  px-[3vw] py-[.5vh] absolute w-full flex font-Archivo text-lg text-[#2b1c1c] font-[570] justify-around items-center drop-shadow-md gap-[5vw] z-50">
       <div className="  w-[19vw] bg-[#fdcb74da] h-[5.8vh] mr-auto rounded-2xl px-[1vw] flex  justify-evenly items-center shadow-inner backdrop-blur-xl ">
