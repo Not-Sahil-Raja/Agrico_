@@ -14,11 +14,11 @@ function Item(props) {
       <img src={props.back} alt="" className="absolute z-0" />
       <div
         onClick={() => {
-          navigate("/demo");
+          navigate("/demo", { state: { name: props.cat } });
         }}
         className=" z-20"
       >
-        Catagory {props.cat}
+        Category {props.cat}
       </div>
     </div>
   );
