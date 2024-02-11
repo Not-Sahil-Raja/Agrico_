@@ -65,9 +65,14 @@ const Header = () => {
         </NavLink>
       </div>
       <div className=" flex gap-[1vw] items-center">
-        <div className=" w-[22%] h-[4vh] flex justify-center items-center rounded bg-[#dbdbdbdc] overflow-hidden cursor-pointer border border-oliveGreen hover:bg-oliveGreen transition-all hover:text-[white]">
+        <NavLink
+          className={() =>
+            `w-[22%] h-[4vh] flex justify-center items-center rounded bg-[#dbdbdbdc] overflow-hidden cursor-pointer border border-oliveGreen hover:bg-oliveGreen transition-all hover:text-[white]`
+          }
+          to="/cart"
+        >
           <ShoppingCart className=" aspect-square   w-full h-[4vh] p-[.8vh] " />
-        </div>
+        </NavLink>
 
         <span className="  overflow-hidden text-white hover:brightness-90 w-[6vw] h-[5vh] relative flex items-center justify-center rounded-sm cursor-pointer transition-all">
           <button

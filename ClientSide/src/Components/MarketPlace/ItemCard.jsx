@@ -1,8 +1,12 @@
 import React from "react";
 import { ShoppingBag } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../Apps/cartSlice.js";
 
 const ItemCard = ({ item }) => {
-  const addToCart = () => {
+  const Dispatch = useDispatch();
+  const addCartItem = () => {
+    Dispatch(addToCart(item));
     console.log("Added to Cart", item._id);
   };
   return (
@@ -23,7 +27,7 @@ const ItemCard = ({ item }) => {
 
       <div
         className=" flex  justify-center items-center bg-[#0000009f] border aspect-square whitespace-nowrap bottom-[5%] left-[5%] text-[#f3f3f3] absolute z-20 font-semibold shadow-text px-[.2vw]  rounded hover:bg-black transition-all drop-shadow-md backdrop-blur-md cursor-pointer"
-        onClick={addToCart}
+        onClick={addCartItem}
       >
         <ShoppingBag
           size={20}
