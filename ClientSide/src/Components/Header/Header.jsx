@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { userlogout } from "../../Apps/userInfoslice.js";
 import { ShoppingCart } from "lucide-react";
+// import Agrico_logo from "../../Images/Agrico_logo.png";
 
 const Header = () => {
   const Dispatch = useDispatch();
@@ -17,13 +18,14 @@ const Header = () => {
   // console.log(userDet);
   return (
     <div className="  mt-[.75vh]  px-[3vw] py-[.5vh] absolute w-full flex font-Archivo text-lg text-[#2b1c1c] font-[570] justify-around items-center drop-shadow-md gap-[5vw] z-50">
-      <div className="  w-[19vw] bg-[#fdcb74da] h-[5.8vh] mr-auto rounded-2xl px-[1vw] flex  justify-evenly items-center shadow-inner backdrop-blur-xl ">
-        <Link className=" py-[.5vh] bg-[#fff7c87e] px-[.35vw] text-center flex-1 backdrop-blur-xl">
-          Logo
+      <div className="  w-[10vw] bg-[#fdcb749c] h-[5.8vh] mr-auto rounded-2xl px-[1vw] flex  justify-evenly items-center shadow-inner backdrop-blur-xl ">
+        <Link className=" py-[.5vh]  px-[.35vw] text-center flex-1 ">
+          {/* <img src={Agrico_logo} alt="" /> */}
+          <span className=" text-2xl  font-semibold font-Syne">AgriCo</span>
         </Link>
-        <div className=" text-base flex-[3] text-center whitespace-nowrap">
-          Company Info text
-        </div>
+        {/* <div className=" text-lg mr-auto flex-[3] text-center whitespace-nowrap">
+          AgriCo
+        </div> */}
       </div>
 
       <div className=" py-[.75vh] bg-[#f8bf5cd7] flex justify-around w-[35vw] backdrop-blur-3xl rounded-lg ">
@@ -49,7 +51,7 @@ const Header = () => {
             }`
           }
         >
-          Catalouge
+          Catalogue
         </NavLink>
         <NavLink
           to="/marketPlace"
