@@ -112,7 +112,7 @@ const MarketPlace = () => {
               >
                 All
               </div>
-              <div
+              {/* <div
                 className={` px-[1vw] py-[.8vh] rounded-lg border border-[#3f3838] transition-all  font-medium whitespace-nowrap cursor-pointer ${
                   marType === 1
                     ? "bg-[#3f3838] shadow-inner text-[#ffffff] "
@@ -121,7 +121,7 @@ const MarketPlace = () => {
                 onClick={() => setMarType(1)}
               >
                 Filter
-              </div>
+              </div> */}
             </div>
             <div className=" ml-auto py-[.2vh] px-[.5vw] rounded-lg  drop-shadow-md  mx-[2vw] flex justify-around items-center gap-[1vw] border border-[#3f3838]">
               <img
