@@ -44,7 +44,7 @@ const Eachcard = () => {
         <div className=" flex-[2.5] px-[1vw] py-[2vh]">
           {/* middle area */}
           <div className=" w-full h-full px-[2vw] py-[2vh] flex flex-col gap-[5vh]">
-            <div className=" w-full h-[75%] bg-red-200 rounded-xl">
+            <div className=" w-full h-[60%] bg-red-200 rounded-xl">
               <iframe
                 src={info.link}
                 title="YouTube video player"
@@ -52,10 +52,17 @@ const Eachcard = () => {
                 className=" w-full h-full rounded-xl"
               />
             </div>
-            <div className=" w-full h-[20%] border-[#2929294f] border flex justify-center items-center rounded-lg">
-              <span className=" text-xl font-Archivo font-semibold">
-                Join Community
+            <div className=" w-full h-[30%] border-[#2929294f] border flex flex-col justify-top items-center rounded-lg overflow-scroll px-8 font-Epilogue scrollbar-hide">
+              <span className=" text-3xl font-Archivo font-semibold mt-[3vh]">
+                Important Points
               </span>
+              <br />
+              <li>{info.point1}</li>
+              <br />
+              <li>{info.point2}</li>
+              <br />
+              <li>{info.point3}</li>
+              <br />
             </div>
           </div>
         </div>
@@ -84,11 +91,11 @@ const Eachcard = () => {
             <div className=" px-[1.5vw] font-semibold border-b border-b-[#2929294f] h-[10%] pb-[.5vh] w-full">
               Overview
             </div>
-            <div className=" px-[1.5vw] font-semibold text-xl font-Archivo bg-[#ffffffab] shadow-inner py-[1vh] h-[20%] flex justify-center items-center">
+            <div className=" px-[1.5vw] font-semibold text-2xl font-Archivo bg-[#ffffffab] shadow-inner py-[1vh] h-[20%] flex justify-center items-center">
               {location.state.name}
             </div>
             <div>
-              <div className=" px-[1.5vw] py-[1.5vh] font-Archivo text-[#292929] h-[34.5vh] text-sm text-ellipsis overflow-hidden">
+              <div className=" px-[1.5vw] py-[1.5vh] font-Archivo text-[#292929] h-[34.5vh] text-md text-ellipsis overflow-hidden">
                 {info.data}
               </div>
             </div>
