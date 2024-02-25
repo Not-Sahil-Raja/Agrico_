@@ -29,7 +29,7 @@ const Login = () => {
   const loginCheck = (e) => {
     e.preventDefault();
 
-    axios.get(`http://localhost:3000/getuser/${email}`).then((res) => {
+    axios.get(`${import.meta.env.VITE_SERVER}/getuser/${email}`).then((res) => {
       if (!res.data) {
         setPopstyle(
           "absolute bg-red-500 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl transition-opacity"
@@ -86,7 +86,7 @@ const Login = () => {
     };
 
     axios
-      .post("http://localhost:3000/postallusers", userdata)
+      .post(`${import.meta.env.VITE_SERVER}/postallusers`, userdata)
       .then(() => {
         console.log(userName, email, phoneNo, password);
         setUserName("");
@@ -119,22 +119,24 @@ const Login = () => {
 
   useEffect(() => {
     if (email != "" && login == false) {
-      axios.get(`http://localhost:3000/checkmail/${email}`).then((res) => {
-        if (!res.data) {
-          setPopstyle(
-            "absolute bg-red-700 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl opacity-0 transition-opacity"
-          );
-          setMailchk(false);
-          console.log("Email does NOT EXIST"); //email not exixts
-        } else {
-          setPopstyle(
-            "absolute bg-red-700 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl transition-opacity"
-          );
-          setPoptext("Email already Exists");
-          console.log("Email already EXISTS"); //email already exists
-          setMailchk(true);
-        }
-      });
+      axios
+        .get(`${import.meta.env.VITE_SERVER}/checkmail/${email}`)
+        .then((res) => {
+          if (!res.data) {
+            setPopstyle(
+              "absolute bg-red-700 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl opacity-0 transition-opacity"
+            );
+            setMailchk(false);
+            console.log("Email does NOT EXIST"); //email not exixts
+          } else {
+            setPopstyle(
+              "absolute bg-red-700 bottom-2 right-2 p-2 h-fit w-fit text-white font-bold rounded-xl transition-opacity"
+            );
+            setPoptext("Email already Exists");
+            console.log("Email already EXISTS"); //email already exists
+            setMailchk(true);
+          }
+        });
     }
   }, [email]);
 
