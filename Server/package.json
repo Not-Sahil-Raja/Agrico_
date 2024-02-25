@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
+    "start": "node index.js",
+    "dev": "nodemon -r dotenv/config --experimental-json-modules index.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
+    "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
     "nodemon": "^3.0.3"
   }
