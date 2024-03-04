@@ -6,15 +6,39 @@ const itemSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
+    itemDescription: {
+      type: String,
+    },
+    category: {
+      type: String,
       required: true,
     },
     quantity: {
       type: Number,
       required: true,
     },
+    unit: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    //add image
+    image: {
+      type: String, // cloudinary url
+    },
+
     username: {
+      type: String,
+      required: true,
+    },
+    contact: {
+      type: Number,
+      required: true,
+    },
+    location: {
       type: String,
       required: true,
     },

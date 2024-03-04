@@ -1,23 +1,36 @@
 import express from "express";
 import { Item } from "../models/marketPlaceItems.model.js";
+import cloudinary from "../utils/cloudinary.js";
+import { upload } from "../middlewares/multer.middleware.js";
 
 const router = express.Router();
 
-router.post("/Allitems", async (req, res) => {
+router.post("/Allitems", upload.single("image"), async (req, res) => {
   try {
     if (
       !req.body.itemName ||
-      !req.body.price ||
+      !req.body.category ||
       !req.body.quantity ||
-      !req.body.username
+      !req.body.unit ||
+      !req.body.price ||
+      !req.body.username ||
+      !req.body.contact ||
+      !req.body.location
     ) {
       return res.status(400).send("Please fill all the fields");
     }
+    const result = await cloudinary.uploadOnCloudinary(req.file.path);
     const items = {
       itemName: req.body.itemName,
-      price: req.body.price,
+      itemDescription: req.body.itemDescription,
+      category: req.body.category,
       quantity: req.body.quantity,
+      unit: req.body.unit,
+      price: req.body.price,
       username: req.body.username,
+      contact: req.body.contact,
+      location: req.body.location,
+      image: result.url,
     };
     const newItem = await Item.create(items);
     return res.status(201).send(newItem);
