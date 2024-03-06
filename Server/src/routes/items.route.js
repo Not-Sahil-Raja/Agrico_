@@ -20,7 +20,11 @@ router.post("/Allitems", async (req, res) => {
     ) {
       return res.status(400).send("Please fill all the fields");
     }
-    // const result = await cloudinary.uploadOnCloudinary(req.file.path);
+    // console.log(req.file);
+
+    // console.log(req.files);
+
+    // const result = await cloudinary.uploader.upload(req.file.path);
     const items = {
       itemName: req.body.itemName,
       itemDescription: req.body.itemDescription,

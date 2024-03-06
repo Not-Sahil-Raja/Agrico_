@@ -63,7 +63,7 @@ const SellItem = () => {
           setQuantity(0);
           setUnit("Kg");
           setPrice("");
-          // setImage(null);
+          setImage(null);
           setFullName("");
           setContactNumber("");
           setLocation("");
@@ -74,7 +74,9 @@ const SellItem = () => {
         console.log(err);
       });
 
-    // console.log("Item Added Axios Not Running rn!!(Backend Not Connected)");
+    console.log(
+      "Item Added Axios Not Running rn!!(Although Backend is Connected)"
+    );
   };
   return (
     <>

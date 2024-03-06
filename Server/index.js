@@ -12,7 +12,7 @@ dotenv.config({
 
 const app = express();
 
-app.use(cors({ origin: "https://agrico.vercel.app" }));
+app.use(cors());
 app.use(express.json());
 app.use("/", users);
 app.use("/", items);
