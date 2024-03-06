@@ -5,7 +5,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 
 const router = express.Router();
 
-router.post("/Allitems", upload.single("image"), async (req, res) => {
+router.post("/Allitems", async (req, res) => {
   try {
     if (
       !req.body.itemName ||
@@ -19,7 +19,7 @@ router.post("/Allitems", upload.single("image"), async (req, res) => {
     ) {
       return res.status(400).send("Please fill all the fields");
     }
-    const result = await cloudinary.uploadOnCloudinary(req.file.path);
+    // const result = await cloudinary.uploadOnCloudinary(req.file.path);
     const items = {
       itemName: req.body.itemName,
       itemDescription: req.body.itemDescription,
@@ -30,7 +30,7 @@ router.post("/Allitems", upload.single("image"), async (req, res) => {
       username: req.body.username,
       contact: req.body.contact,
       location: req.body.location,
-      image: result.url,
+      // image: result.url,
     };
     const newItem = await Item.create(items);
     return res.status(201).send(newItem);

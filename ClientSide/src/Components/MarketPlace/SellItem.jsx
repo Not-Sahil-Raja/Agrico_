@@ -9,6 +9,7 @@ const SellItem = () => {
   const [additemCheck, setAdditemCheck] = useState(false);
   const [addedPop, setAddedPop] = useState(false);
   const [addedItemList, setAddedItemList] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
   //item details
   const [itemName, setItemName] = useState("");
@@ -44,12 +45,13 @@ const SellItem = () => {
       username: fullName,
       contact: contactNumber,
       location: location,
-      image: image,
+      // image: image,
     };
     // console.log(item);
     console.log(item);
     axios
       .post(`${import.meta.env.VITE_SERVER}/Allitems`, item)
+      // .post(`http://localhost:3000/Allitems`, item)
       .then((res) => {
         console.log(res.data);
         setAddedPop(true);
@@ -61,7 +63,7 @@ const SellItem = () => {
           setQuantity(0);
           setUnit("Kg");
           setPrice("");
-          setImage(null);
+          // setImage(null);
           setFullName("");
           setContactNumber("");
           setLocation("");
