@@ -18,7 +18,19 @@ router.post("/Allitems", async (req, res) => {
       !req.body.contact ||
       !req.body.location
     ) {
-      return res.status(400).send("Please fill all the fields");
+      return res
+        .status(400)
+        .send(
+          "Please fill all the fields",
+          req.body.itemName,
+          req.body.category,
+          req.body.quantity,
+          req.body.unit,
+          req.body.price,
+          req.body.username,
+          req.body.contact,
+          req.body.location
+        );
     }
     // console.log(req.file);
 

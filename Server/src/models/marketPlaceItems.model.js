@@ -8,6 +8,7 @@ const itemSchema = new mongoose.Schema(
     },
     itemDescription: {
       type: String,
+      required: false,
     },
     category: {
       type: String,
@@ -26,9 +27,9 @@ const itemSchema = new mongoose.Schema(
       required: true,
     },
     //add image
-    image: {
-      type: String, // cloudinary url
-    },
+    // image: {
+    //   type: String, // cloudinary url
+    // },
 
     username: {
       type: String,
