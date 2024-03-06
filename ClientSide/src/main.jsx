@@ -14,6 +14,7 @@ import { store } from "./Apps/store.js";
 import { Provider } from "react-redux";
 import Cart from "./Components/Cart/Cart.jsx";
 import Eachcard from "./Components/Catalogue/Eachcard.jsx";
+import SellItem from "./Components/MarketPlace/SellItem.jsx";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/demo",
         element: <Eachcard />,
+      },
+      {
+        path: "/sellitem",
+        element: <SellItem />,
       },
     ],
   },

@@ -13,7 +13,7 @@
     "@headlessui/react": "^1.7.18",
     "@reduxjs/toolkit": "^2.1.0",
     "axios": "^1.6.7",
-    "framer-motion": "^11.0.3",
+    "framer-motion": "^11.0.6",
     "gsap": "^3.12.5",
     "lucide": "^0.323.0",
     "lucide-react": "^0.323.0",

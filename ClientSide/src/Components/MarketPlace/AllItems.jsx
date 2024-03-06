@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import TopPickCard from "./TopPickCard";
 import axios from "axios";
 import ItemCard from "./ItemCard";
+import { motion } from "framer-motion";
+import ShowDet from "./ShowDet";
 
 const AllItems = () => {
   const [itemList, setItemList] = useState([]);
-
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_SERVER}/itemsList`)
@@ -16,73 +17,76 @@ const AllItems = () => {
         console.log(err);
       });
   }, []);
-
   return (
     <>
-      <div className=" h-[50%] flex flex-col ">
-        <span className="ml-[.5vw] text-lg font-Archivo font-semibold">
-          Best Items At Low Price
-        </span>
-        <div className=" text-lg font-Archivo flex gap-[1vw] h-[100vh] relative overflow-x-scroll scrollbar-hide py-[1%] px-[.5%]">
-          <TopPickCard
-            width={30}
-            fsize={"lg"}
-            imglinks={
-              "https://images.unsplash.com/photo-1561136594-7f68413baa99?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D "
-            }
-            itemsName={"Tomato"}
-            price={"2000"}
-            suppName={"Ganesh Traders"}
-          />
-          <TopPickCard
-            width={20}
-            fsize={"sm"}
-            imglinks={
-              "https://images.unsplash.com/photo-1501430654243-c934cec2e1c0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3"
-            }
-            itemsName={"Wheat"}
-            price={"800"}
-            suppName={"Avi Traders"}
-          />
-          <TopPickCard
-            width={20}
-            fsize={"sm"}
-            imglinks={
-              " https://images.unsplash.com/photo-1603048719539-9ecb4aa395e3?q=80&w=2084&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            itemsName={"Potato"}
-            price={"500"}
-            suppName={"Vegetable Market"}
-          />
-          <TopPickCard
-            width={20}
-            fsize={"sm"}
-            imglinks={
-              "https://images.unsplash.com/photo-1582515073490-39981397c445?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            itemsName={"Carrot"}
-            price={"600"}
-            suppName={"Rajesh"}
-          />
-          <TopPickCard
-            width={20}
-            fsize={"sm"}
-            imglinks={
-              "https://images.unsplash.com/photo-1563635707628-9d39fd827e84?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D "
-            }
-            itemsName={"Almond"}
-            price={"3000"}
-            suppName={"Dinesh Traders"}
-          />
-        </div>
-      </div>
-      <span className="ml-[.5vw] text-lg font-Archivo font-semibold  text-[#242424] ">
-        All Items List
-      </span>
-      <div className=" h-fit w-full  grid grid-cols-5 gap-5 px-[1%] py-[2vh] row-auto ">
-        {itemList.map((item, index) => (
-          <ItemCard key={index} item={item} />
-        ))}
+      <div className=" h-fit flex flex-col relative  ">
+        <ShowDet />
+
+        {itemList.length > 0 ? (
+          <>
+            <div className=" text-xl font-Manrope font-semibold h-[20vh] flex flex-col px-[2%] justify-center">
+              <span className="h-2/3 text-3xl flex items-end">
+                Buy AnyThing You Want
+              </span>
+              <div className=" h-1/3 flex items-center ">
+                <span className=" opacity-70 text-base">
+                  Get the Best Quality Products at Best Prices
+                </span>
+              </div>
+            </div>
+            <motion.div
+              className=" h-fit w-full  grid grid-cols-5 2xl:grid-cols-6 gap-5 px-[2%] py-[2vh] row-auto "
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              {itemList.map((item, index) => (
+                <ItemCard key={index} item={item} />
+              ))}
+            </motion.div>
+          </>
+        ) : (
+          <>
+            <div className=" h-[50vh] flex justify-center items-center   ">
+              <div className=" relative h-[8vh] w-[10vw] rounded-sm overflow-hidden  ">
+                <motion.div
+                  className=" w-full text-xl font-semibold font-WorkSans px-4 py-1 text-[#000000af] top-1/2 left-1/2 z-20 absolute [transform:translate(-50%,-50%)]"
+                  animate={{
+                    opacity: ["20%", "50%"],
+                    textShadow: [
+                      "0px 0px 0px #00000000",
+                      "0px 0px .8px #000000",
+                    ],
+                  }}
+                  transition={{
+                    duration: 1.85,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut",
+                    repeatDelay: 0.5,
+                  }}
+                >
+                  Loading...
+                </motion.div>
+                <motion.div
+                  className=" bg-[#e4555581] shadow-inner h-full  w-full absolute -z-0"
+                  animate={{
+                    width: ["0%", "100%"],
+                    background: ["#00000010", "#00000020"],
+                    backgroundColor: ["#00000020", "#e4555581"],
+                  }}
+                  transition={{
+                    duration: 1.85,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut",
+                    repeatDelay: 0.5,
+                  }}
+                ></motion.div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );
