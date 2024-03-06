@@ -47,9 +47,7 @@ const SellItem = () => {
       image: image,
     };
     // console.log(item);
-
-    //(now working )axios is disabled for now because the new  server is not yet deployed
-
+    console.log(item);
     axios
       .post(`${import.meta.env.VITE_SERVER}/Allitems`, item)
       .then((res) => {
@@ -74,7 +72,7 @@ const SellItem = () => {
         console.log(err);
       });
 
-    console.log("Item Added Axios Not Runnong rn!!(Backend Not Connected)");
+    // console.log("Item Added Axios Not Running rn!!(Backend Not Connected)");
   };
   return (
     <>
