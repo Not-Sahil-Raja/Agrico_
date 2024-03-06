@@ -66,7 +66,7 @@ const ContactUs = () => {
                 onChange={(e) => {
                   setM1(e.target.value);
                 }}
-                required:true
+                required
               />
             </div>
             <div className="h-1/3 w-full  px-[1vw]">
@@ -77,7 +77,7 @@ const ContactUs = () => {
                 onChange={(e) => {
                   setM2(e.target.value);
                 }}
-                required:true
+                required
               />
             </div>
             <div className="h-1/3 w-full  px-[1vw]">
@@ -89,7 +89,7 @@ const ContactUs = () => {
                 onChange={(e) => {
                   setM3(e.target.value);
                 }}
-                required:true
+                required
               />
             </div>
           </div>
