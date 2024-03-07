@@ -36,7 +36,10 @@ const SellItem = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/api/dashboard/listedItem/${userInfos.username}`
+        // `http://localhost:3000/api/dashboard/listedItem/${userInfos.username}`
+        `${import.meta.env.VITE_SERVER}/dashboard/listedItem/${
+          userInfos.username
+        }`
       )
       .then((res) => {
         setAllAddedItems(res.data);
