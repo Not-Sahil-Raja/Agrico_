@@ -5,6 +5,7 @@ import cors from "cors";
 import users from "./src/routes/users.route.js";
 import items from "./src/routes/items.route.js";
 import courses from "./src/routes/courses.route.js";
+import dashboard from "./src/routes/dashboard.route.js";
 
 dotenv.config({
   path: "../env",
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/api/", users);
 app.use("/api/", items);
 app.use("/api/", courses);
+app.use("/api/", dashboard);
 
 connectDB()
   .then(() => {
