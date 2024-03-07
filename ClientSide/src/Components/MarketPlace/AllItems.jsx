@@ -21,8 +21,6 @@ const AllItems = () => {
   return (
     <>
       <div className=" h-fit flex flex-col relative  ">
-        <ShowDet />
-
         {itemList.length > 0 ? (
           <>
             <div className=" text-xl font-Manrope font-semibold h-[20vh] flex flex-col px-[2%] justify-center">

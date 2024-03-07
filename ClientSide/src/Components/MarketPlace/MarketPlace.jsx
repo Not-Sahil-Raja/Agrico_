@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import TopItems from "./TopItems";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import ShowDet from "./ShowDet";
 
 const MarketPlace = () => {
   const userInfos = useSelector((state) => state.userInfo.userInfo);
@@ -30,10 +31,24 @@ const MarketPlace = () => {
         console.log(err);
       });
   }, [refresh]);
+  const PopUp = useSelector((state) => state.itemPopUp.PopUp);
 
   return (
     <>
-      <div className="   bg-[#fffff2] w-full h-[100vh]  overflow-x-hidden select-none ">
+      <ShowDet />
+      <motion.div
+        className=" bri bg-[#fffff2] w-full h-[100vh]  overflow-x-hidden select-none "
+        // animate={{ brightness: PopUp ? 0.5 : 1 }}
+        style={{
+          filter: PopUp
+            ? "blur(5px) brightness(0.5)"
+            : "blur(0px) brightness(1)",
+          pointerEvents: PopUp ? "none" : "all",
+          //  PopUp ?  : "",
+        }}
+        transition={{ duration: 0.2, type: "tween", ease: "easeInOut" }}
+        pointerEve
+      >
         <div className=" w-full h-[40vh] backdrop-blur-sm overflow-hidden relative">
           <motion.img
             src="https://images.unsplash.com/photo-1530267981375-f0de937f5f13?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -156,7 +171,7 @@ const MarketPlace = () => {
             </motion.div>
           </NavLink>
         </motion.div>
-      </div>
+      </motion.div>
     </>
   );
 };
