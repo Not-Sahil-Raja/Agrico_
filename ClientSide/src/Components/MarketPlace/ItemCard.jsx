@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ShoppingBag } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Apps/cartSlice";
@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const ItemCard = ({ item }) => {
   const [addToCartItem, setaddToCartItem] = useState(false);
+  const [coverImg, setCoverImg] = useState("");
   const PopUp = useSelector((state) => state.itemPopUp.PopUp);
   const Dispatch = useDispatch();
   item = { ...item, cartadd: false };
@@ -21,32 +22,45 @@ const ItemCard = ({ item }) => {
       setaddToCartItem(false);
     }, 2000);
   };
-
+  useEffect(() => {
+    if (item.cover) {
+      setCoverImg(item.cover);
+    } else {
+      setCoverImg(
+        "https://images.unsplash.com/photo-1596503799872-5c5f052c27b9?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      );
+    }
+  }, [item.cover]);
   return (
     <motion.div
-      className="  h-[18rem] text-sm  bg-[#d6d6d646] drop-shadow-lg border border-[#bdb8b8] rounded-lg flex flex-col justify-between items-center px-[3%] py-[3%] font-Montserrat font-semibold relative"
-      onClick={() => {
-        Dispatch(setDetails({ details: item, PopUp: PopUp }));
-      }}
+      className="  h-[20rem] text-sm  bg-[#d6d6d646] drop-shadow-lg border border-[#bdb8b8] rounded-lg flex flex-col justify-between items-center px-[3%] py-[3%] font-Montserrat font-semibold relative cursor-pointer"
+      whileHover={{ backgroundColor: "#d6d6d6" }}
     >
-      <img
-        src="https://images.unsplash.com/photo-1501430654243-c934cec2e1c0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt={item.itemName + ".img"}
-        className=" w-full h-[70%] object-cover rounded-lg  brightness-90"
-      />
-      <div className=" h-[30%]  flex font-Manrope justify-between w-full items-center pt-[3%]">
-        <div className=" flex-[3] h-full flex flex-col px-[5%] ">
-          <span className=" text-lg font-semibold ">{item.itemName}</span>
-          <span className=" text-md font-semibold text-[#000000ce]">
-            ₹{item.price}
-          </span>
-          <span className="text-sm font-semibold  text-[#000000af]">
-            {item.username}
-          </span>
-        </div>
-        <div className=" flex-1 h-full px-[5%] flex flex-col justify-start items-center pt-[3%]">
-          <span className=" text-md font-semibold ">Quantity</span>
-          <span className=" text-lg font-semibold">{item.quantity}</span>
+      <div
+        className=" w-full h-full"
+        onClick={() => {
+          Dispatch(setDetails({ details: item, PopUp: PopUp }));
+        }}
+      >
+        <motion.img
+          src={coverImg}
+          alt={item.itemName + ".img"}
+          className=" w-full h-[70%] object-cover rounded-lg  brightness-90"
+        />
+        <div className=" h-[30%]  flex font-Manrope justify-between w-full items-center pt-[3%]">
+          <div className=" flex-[3] h-full flex flex-col px-[5%] ">
+            <span className=" text-lg font-semibold ">{item.itemName}</span>
+            <span className=" text-md font-semibold text-[#000000ce]">
+              ₹{item.price}
+            </span>
+            <span className="text-sm font-semibold  text-[#000000af]">
+              {item.username}
+            </span>
+          </div>
+          <div className=" flex-1 h-full px-[5%] flex flex-col justify-start items-center pt-[3%]">
+            <span className=" text-md font-semibold ">Quantity</span>
+            <span className=" text-lg font-semibold">{item.quantity}</span>
+          </div>
         </div>
       </div>
 

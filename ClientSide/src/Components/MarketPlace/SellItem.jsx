@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { XSquare, CheckSquare2, ArrowLeft, X } from "lucide-react";
-import axios from "axios";
+import axios, { all } from "axios";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 
@@ -29,6 +29,29 @@ const SellItem = () => {
   const [addItemdet, setAddItemdet] = useState(false);
   const [allAddedItems, setAllAddedItems] = useState([]);
 
+  //items cost
+  const [listedCost, setListedCost] = useState(0);
+
+  //fetching all items
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:3000/api/dashboard/listedItem/${userInfos.username}`
+      )
+      .then((res) => {
+        setAllAddedItems(res.data);
+        if (res.data.length > 0) {
+          let totalCost = 0;
+          res.data.map((item) => {
+            totalCost += item.price;
+          });
+          setListedCost(totalCost);
+        }
+      });
+    console.log(allAddedItems);
+  }, [refresh]);
+  // console.log(userInfos);
+  console.log(listedCost);
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setCoverImg(file);
@@ -410,9 +433,11 @@ const SellItem = () => {
             {/* Gross Profit*/}
             <div className=" flex-1 flex flex-col h-[23vh] px-3 bg-white rounded-sm drop-shadow-md overflow-hidden">
               <span className="h-[25%] py-1 border-b border-b-[#0000003f] font-medium text-[#000000ce]  px-2 text-lg ">
-                Gross Profit
+                Listed Items Cost
               </span>
-              <span className="h-[40%] py-1 px-2 text-lg">1900 ruppess</span>
+              <span className="h-[40%] py-1 px-2 text-lg">
+                {listedCost} ruppess
+              </span>
               <span className="h-[35%] py-1 px-2">Change </span>
             </div>
           </motion.div>
@@ -427,31 +452,52 @@ const SellItem = () => {
               <span className="h-8 mt-2 mx-3 py-1 border-b border-b-[#0000003f] font-medium text-[#000000ce]  px-2 text-base ">
                 Recent Orders
               </span>
-              <div className="h-8 mt-2 mx-3 py-1 border border-[#0000003f] rounded-md font-medium text-[#000000ce]  px-2 text-sm flex justify-around">
-                <span>Image</span>
-                <span>Product</span>
-                <span>Order ID</span>
-                <span>Price</span>
-                <span>Est Price</span>
+              <div className="h-8 mt-2 mx-3 py-1 border border-[#0000003f] rounded-md font-medium text-[#000000ce]  px-2 text-sm flex ">
+                <span className=" flex-1 flex justify-center items-center">
+                  Image
+                </span>
+                <span className=" flex-1 flex justify-center items-center">
+                  Product
+                </span>
+                <span className=" flex-1 flex justify-center items-center">
+                  Quantity
+                </span>
+                <span className=" flex-1 flex justify-center items-center">
+                  Price
+                </span>
+                <span className=" flex-1 flex justify-center items-center">
+                  Date
+                </span>
               </div>
               <div className="  flex flex-col gap-2 w-full h-fit mt-3 px-4 py-2 pb-6">
-                <div className=" w-full bg-white border  py-3 px-2 rounded-md drop-shadow-lg flex justify-around">
-                  <span className=" bg-slate-200 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" absolute">Image</p>
-                  </span>
-                  <span className=" bg-slate-300 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" absolute">Product</p>
-                  </span>
-                  <span className=" bg-slate-400 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" absolute">Order ID</p>
-                  </span>
-                  <span className=" bg-slate-500 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" "> Price</p>
-                  </span>
-                  <span className=" bg-slate-600 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" ">Est Price</p>
-                  </span>
-                </div>
+                {allAddedItems.map((product) => (
+                  <div className=" w-full bg-white border h-20 flex-wrap  py-1 px-1 rounded-md overflow-hidden font-WorkSans drop-shadow-lg flex justify-around">
+                    <span className="  flex-1 overflow-hidden text-ellipsis relative">
+                      <div className=" absolute h-full">
+                        <img
+                          src={product.cover}
+                          alt=""
+                          className=" w-full h-full object-cover rounded-lg"
+                        />
+                      </div>
+                    </span>
+                    <span className="  flex-1 overflow-hidden  flex justify-center items-center  text-ellipsis relative">
+                      <p className=" absolute">{product.itemName}</p>
+                    </span>
+                    <span className="   flex-[.7] flex justify-center items-center  text-ellipsis relative">
+                      <p className=" absolute font-medium">
+                        {product.quantity}
+                        {product.unit}
+                      </p>
+                    </span>
+                    <span className="  flex-[.7] flex justify-center opacity-70 items-center font-semibold overflow-hidden text-ellipsis relative">
+                      <p className=" "> {product.price}₹</p>
+                    </span>
+                    <span className="  flex-1 overflow-hidden text-ellipsis flex justify-center items-center relative whitespace-nowrap">
+                      <p className=" ">{product.updatedAt.substring(2, 10)}</p>
+                    </span>
+                  </div>
+                ))}
               </div>
             </motion.div>
 
