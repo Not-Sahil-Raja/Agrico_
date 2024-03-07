@@ -8,7 +8,7 @@ const ShowDet = () => {
   const details = useSelector((state) => state.itemPopUp.details);
   const PopUp = useSelector((state) => state.itemPopUp.PopUp);
 
-  console.log(details, PopUp);
+  // console.log(details, PopUp);
   const Dispatch = useDispatch();
   return (
     <div>

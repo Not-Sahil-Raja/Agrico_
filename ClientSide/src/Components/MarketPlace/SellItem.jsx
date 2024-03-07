@@ -51,10 +51,10 @@ const SellItem = () => {
           setListedCost(totalCost);
         }
       });
-    console.log(allAddedItems);
+    // console.log(allAddedItems);
   }, [refresh]);
   // console.log(userInfos);
-  console.log(listedCost);
+  // console.log(listedCost);
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setCoverImg(file);
@@ -393,16 +393,19 @@ const SellItem = () => {
           </motion.form>
         </div>
         <motion.div
-          className=" w-full  h-full  px-16 py-10 blur-sm fill-slate-800"
+          className=" w-full  h-full  px-16 py-10  fill-slate-800"
           animate={{
-            filter: addItemdet ? "blur(3px)" : "blur(0px)",
-            brightness: addItemdet ? "0.5" : "1",
+            // filter: addItemdet ? "blur(3px)" : "blur(0px)",
+            brightness: addItemdet ? 0.5 : 1,
             transition: {
               duration: 0.5,
               type: "spring",
               stiffness: 300,
               damping: 30,
             },
+          }}
+          style={{
+            filter: addItemdet ? "blur(3px)" : "blur(0px)",
           }}
         >
           {/* Profits */}
@@ -473,8 +476,11 @@ const SellItem = () => {
                 </span>
               </div>
               <div className="  flex flex-col gap-2 w-full h-fit mt-3 px-4 py-2 pb-6">
-                {allAddedItems.map((product) => (
-                  <div className=" w-full bg-white border h-20 flex-wrap  py-1 px-1 rounded-md overflow-hidden font-WorkSans drop-shadow-lg flex justify-around">
+                {allAddedItems.map((product, index) => (
+                  <div
+                    className=" w-full bg-white border h-20 flex-wrap  py-1 px-1 rounded-md overflow-hidden font-WorkSans drop-shadow-lg flex justify-around"
+                    key={index}
+                  >
                     <span className="  flex-1 overflow-hidden text-ellipsis relative">
                       <div className=" absolute h-full">
                         <img
