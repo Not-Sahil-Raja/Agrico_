@@ -4,6 +4,7 @@ import axios from "axios";
 import ItemCard from "./ItemCard";
 import { motion } from "framer-motion";
 import ShowDet from "./ShowDet";
+import { Loader } from "lucide-react";
 
 const AllItems = () => {
   const [itemList, setItemList] = useState([]);
@@ -48,41 +49,20 @@ const AllItems = () => {
         ) : (
           <>
             <div className=" h-[50vh] flex justify-center items-center   ">
-              <div className=" relative h-[8vh] w-[10vw] rounded-sm overflow-hidden  ">
+              <div className="  w-16 h-12 flex justify-center items-center">
                 <motion.div
-                  className=" w-full text-xl font-semibold font-WorkSans px-4 py-1 text-[#000000af] top-1/2 left-1/2 z-20 absolute [transform:translate(-50%,-50%)]"
-                  animate={{
-                    opacity: ["20%", "50%"],
-                    textShadow: [
-                      "0px 0px 0px #00000000",
-                      "0px 0px .8px #000000",
-                    ],
-                  }}
+                  className=" "
+                  initial={{ rotate: 0, opacity: 1 }}
+                  animate={{ rotate: 360, opacity: 0.5 }}
                   transition={{
-                    duration: 1.85,
+                    duration: 2,
                     repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "easeInOut",
-                    repeatDelay: 0.5,
+                    ease: "linear",
+                    repeatType: "loop",
                   }}
                 >
-                  Loading...
+                  <Loader size={30} />
                 </motion.div>
-                <motion.div
-                  className=" bg-[#e4555581] shadow-inner h-full  w-full absolute -z-0"
-                  animate={{
-                    width: ["0%", "100%"],
-                    background: ["#00000010", "#00000020"],
-                    backgroundColor: ["#00000020", "#e4555581"],
-                  }}
-                  transition={{
-                    duration: 1.85,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "easeInOut",
-                    repeatDelay: 0.5,
-                  }}
-                ></motion.div>
               </div>
             </div>
           </>
