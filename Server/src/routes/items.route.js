@@ -1,12 +1,12 @@
 import express from "express";
 import { Item } from "../models/marketPlaceItems.model.js";
-import cloudinary from "../utils/cloudinary.js";
-import { upload } from "../middlewares/multer.middleware.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import upload from "../middlewares/multer.middleware.js";
 
 const router = express.Router();
 
-// router.post("/Allitems", upload.single("image"), async (req, res) => {
-router.post("/Allitems", async (req, res) => {
+router.post("/Allitems", upload.single("cover"), async (req, res) => {
+  // router.post("/Allitems", async (req, res) => {
   try {
     if (
       !req.body.itemName ||
@@ -18,25 +18,12 @@ router.post("/Allitems", async (req, res) => {
       !req.body.contact ||
       !req.body.location
     ) {
-      return res
-        .status(400)
-        .send(
-          "Please fill all the fields",
-          req.body.itemName,
-          req.body.category,
-          req.body.quantity,
-          req.body.unit,
-          req.body.price,
-          req.body.username,
-          req.body.contact,
-          req.body.location
-        );
+      return res.status(400).send("Please fill all the fields");
     }
-    // console.log(req.file);
-
+    console.log(req.file);
     // console.log(req.files);
-
-    // const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await uploadOnCloudinary(req.file.path);
+    console.log(result);
     const items = {
       itemName: req.body.itemName,
       itemDescription: req.body.itemDescription,
@@ -47,7 +34,7 @@ router.post("/Allitems", async (req, res) => {
       username: req.body.username,
       contact: req.body.contact,
       location: req.body.location,
-      // image: result.url,
+      cover: result.url,
     };
     const newItem = await Item.create(items);
     return res.status(201).send(newItem);

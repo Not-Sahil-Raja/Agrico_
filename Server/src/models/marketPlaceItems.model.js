@@ -27,9 +27,9 @@ const itemSchema = new mongoose.Schema(
       required: true,
     },
     //add image
-    // image: {
-    //   type: String, // cloudinary url
-    // },
+    cover: {
+      type: String, // cloudinary url
+    },
 
     username: {
       type: String,

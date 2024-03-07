@@ -18,7 +18,7 @@ const SellItem = () => {
   const [quantity, setQuantity] = useState(0);
   const [unit, setUnit] = useState("Kg");
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState(null);
+  const [cover, setCoverImg] = useState(null);
 
   // user Details
   const [fullName, setFullName] = useState("");
@@ -29,29 +29,33 @@ const SellItem = () => {
   const [addItemdet, setAddItemdet] = useState(false);
   const [allAddedItems, setAllAddedItems] = useState([]);
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setCoverImg(file);
+  };
+  // console.log(cover);
   useEffect(() => {
     setFullName(userInfos.username);
   }, [userInfos]);
 
   const addItem = (e) => {
     e.preventDefault();
-    const item = {
-      itemName: itemName,
-      itemDescription: itemDescription,
-      category: catr,
-      quantity: quantity,
-      unit: unit,
-      price: price,
-      username: fullName,
-      contact: contactNumber,
-      location: location,
-      // image: image,
-    };
-    // console.log(item);
-    console.log(item);
+    // noramal object wasn't working so used FormData
+    const formData = new FormData();
+    formData.append("itemName", itemName);
+    formData.append("itemDescription", itemDescription);
+    formData.append("category", catr);
+    formData.append("quantity", quantity);
+    formData.append("unit", unit);
+    formData.append("price", price);
+    formData.append("username", fullName);
+    formData.append("contact", contactNumber);
+    formData.append("location", location);
+    formData.append("cover", cover);
+    // console.log(formData);
     axios
-      .post(`${import.meta.env.VITE_SERVER}/Allitems`, item)
-      // .post(`http://localhost:3000/Allitems`, item)
+      // .post(`http://localhost:3000/api/Allitems`, formData) //for checking with local server
+      .post(`${import.meta.env.VITE_SERVER}/Allitems`, formData)
       .then((res) => {
         console.log(res.data);
         setAddedPop(true);
@@ -63,7 +67,7 @@ const SellItem = () => {
           setQuantity(0);
           setUnit("Kg");
           setPrice("");
-          setImage(null);
+          setCoverImg(null);
           setFullName("");
           setContactNumber("");
           setLocation("");
@@ -74,9 +78,9 @@ const SellItem = () => {
         console.log(err);
       });
 
-    console.log(
-      "Item Added Axios Not Running rn!!(Although Backend is Connected)"
-    );
+    // console.log(
+    //   "Item Added Axios Not Running rn!!(Although Backend is Connected)"
+    // );
   };
   return (
     <>
@@ -131,6 +135,7 @@ const SellItem = () => {
         </div>
         <div className=" absolute top-0 h-fit z-[5]">
           <motion.form
+            encType="multipart/form-data"
             className="w-[80%] mt-10 overflow-hidden h-full bg-[#ffffff] backdrop-blur-md drop-shadow-lg flex flex-col font-WorkSans"
             onSubmit={addItem}
             initial={{ width: "0%" }}
@@ -268,7 +273,7 @@ const SellItem = () => {
                         </label>
                         <div className="w-full h-[60%] flex items-center justify-center border border-dashed rounded-md">
                           <input
-                            onChange={(e) => setImage(e.target.files[0])}
+                            onChange={handleImageChange}
                             type="file"
                             accept="image/*"
                             id="image"
