@@ -4,6 +4,7 @@ import CartCard from "./CartCard";
 import { useState } from "react";
 import { CheckSquare, XCircle } from "lucide-react";
 import { emptyCart } from "../../Apps/cartSlice";
+import { AnimatePresence } from "framer-motion";
 
 const Cart = () => {
   const [selectedOptions, setSelectedOptions] = useState("Gpay");
@@ -31,6 +32,7 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {}, [cartItems]);
+  console.log("CartItems", cartItems);
 
   const [payDetails, setPayDetails] = useState({});
 
@@ -109,13 +111,15 @@ const Cart = () => {
                 >
                   Add Someting To Cart
                 </div>
-                {cartItems.length > 0 ? (
-                  cartItems.map((item, index) => (
-                    <CartCard key={index} item={item} />
-                  ))
-                ) : (
-                  <></>
-                )}
+                <AnimatePresence>
+                  {cartItems.length > 0 ? (
+                    cartItems.map((item, index) => (
+                      <CartCard key={index} item={item} />
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </AnimatePresence>
               </div>
 
               <div className=" bg-[#d8d8d850] mt-[3vh] h-[35%] w-full rounded-lg">

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { updateCart } from "../../Apps/cartSlice";
 import { XSquare } from "lucide-react";
 import { removeFromCart } from "../../Apps/cartSlice";
+import { motion } from "framer-motion";
 
 const CartCard = ({ item }) => {
   //feature not working-->
@@ -15,7 +16,10 @@ const CartCard = ({ item }) => {
 
   return (
     <>
-      <div className=" bg-[#00000010] flex justify-between items-center px-[2vw] py-[1vh] my-[1vh] rounded-md shadow-md bg-opacity-80 backdrop-blur-sm">
+      <motion.div
+        className=" bg-[#00000010] flex justify-between items-center px-[2vw] py-[1vh] my-[1vh] rounded-md shadow-md bg-opacity-80 backdrop-blur-sm"
+        layout
+      >
         <div className="w-[65%] overflow-hidden text-ellipsis">
           <div className=" font-Archivo font-semibold ">{item.itemName}</div>
           <div className=" text-sm ">{item.quantity}Kg</div>
@@ -31,14 +35,8 @@ const CartCard = ({ item }) => {
             />
           </span>
           {/* not working */}
-          {/* <input
-            className=" bg-slate-300 ml-auto"
-            type="checkbox"
-            value={item.price}
-            onChange={() => setPriceAdd(!priceAdd)}
-          /> */}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
