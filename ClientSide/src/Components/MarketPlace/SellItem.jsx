@@ -28,6 +28,7 @@ const SellItem = () => {
   const userInfos = useSelector((state) => state.userInfo.userInfo);
   const [addItemdet, setAddItemdet] = useState(false);
   const [allAddedItems, setAllAddedItems] = useState([]);
+  const [soldItemList, setSoldItemList] = useState([]);
 
   //items cost
   const [listedCost, setListedCost] = useState(0);
@@ -50,6 +51,17 @@ const SellItem = () => {
           });
           setListedCost(totalCost);
         }
+      });
+
+    axios
+      .get(
+        // `http://localhost:3000/api/dashboard/soldItem/${userInfos.username}`
+        `${import.meta.env.VITE_SERVER}/dashboard/soldItem/
+        ${userInfos.username}`
+      )
+      .then((res) => {
+        setSoldItemList(res.data);
+        console.log(res);
       });
     // console.log(allAddedItems);
   }, [refresh]);
@@ -326,10 +338,11 @@ const SellItem = () => {
                           <input
                             id="name"
                             type="text"
-                            className="form-input block w-full px-3 py-1 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                            className="form-input block w-full px-3 py-1 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 select-none"
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
                             required
+                            readOnly={true}
                           />
                         </div>
                       </div>
@@ -425,7 +438,7 @@ const SellItem = () => {
               <span className="h-[25%] py-1 border-b border-b-[#0000003f] font-medium text-[#000000ce]  px-2 text-lg ">
                 Gross Profit
               </span>
-              <span className="h-[40%] py-1 px-2 text-lg">1900 ruppess</span>
+              <span className="h-[40%] py-1 px-2 text-lg">1900₹</span>
               <span className="h-[35%] py-1 px-2">Change </span>
             </div>
             {/* Cost & Fees */}
@@ -433,17 +446,15 @@ const SellItem = () => {
               <span className="h-[25%] py-1 border-b border-b-[#0000003f] font-medium text-[#000000ce]  px-2 text-lg ">
                 Cost & Fees
               </span>
-              <span className="h-[40%] py-1 px-2 text-lg">1900 ruppess</span>
+              <span className="h-[40%] py-1 px-2 text-lg">1900₹</span>
               <span className="h-[35%] py-1 px-2">Change </span>
             </div>
             {/* Gross Profit*/}
             <div className=" flex-1 flex flex-col h-[23vh] px-3 bg-white rounded-sm drop-shadow-md overflow-hidden">
               <span className="h-[25%] py-1 border-b border-b-[#0000003f] font-medium text-[#000000ce]  px-2 text-lg ">
-                Listed Items Cost
+                Not Selled Yet
               </span>
-              <span className="h-[40%] py-1 px-2 text-lg">
-                {listedCost} ruppess
-              </span>
+              <span className="h-[40%] py-1 px-2 text-lg">{listedCost}₹</span>
               <span className="h-[35%] py-1 px-2">Change </span>
             </div>
           </motion.div>
@@ -456,7 +467,7 @@ const SellItem = () => {
               animate={{ opacity: 1, y: 0 }}
             >
               <span className="h-8 mt-2 mx-3 py-1 border-b border-b-[#0000003f] font-medium text-[#000000ce]  px-2 text-base ">
-                Recent Orders
+                Not Selled Yet
               </span>
               <div className="h-8 mt-2 mx-3 py-1 border border-[#0000003f] rounded-md font-medium text-[#000000ce]  px-2 text-sm flex ">
                 <span className=" flex-1 flex justify-center items-center">
@@ -526,23 +537,37 @@ const SellItem = () => {
                 <span>Est Price</span>
               </div>
               <div className="  flex flex-col gap-2 w-full h-fit mt-3 px-4 py-2 pb-6">
-                <div className=" w-full bg-white border  py-3 px-2 rounded-md drop-shadow-lg flex justify-around">
-                  <span className=" bg-slate-200 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" absolute">Image</p>
-                  </span>
-                  <span className=" bg-slate-300 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" absolute">Product</p>
-                  </span>
-                  <span className=" bg-slate-400 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" absolute">Order ID</p>
-                  </span>
-                  <span className=" bg-slate-500 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" "> Price</p>
-                  </span>
-                  <span className=" bg-slate-600 flex-1 overflow-hidden text-ellipsis relative">
-                    <p className=" ">Est Price</p>
-                  </span>
-                </div>
+                {soldItemList.map((product, index) => (
+                  <div
+                    className=" w-full bg-white border h-20 flex-wrap  py-1 px-1 rounded-md overflow-hidden font-WorkSans drop-shadow-lg flex justify-around"
+                    key={index}
+                  >
+                    <span className="  flex-1 overflow-hidden text-ellipsis relative">
+                      <div className=" absolute h-full">
+                        <img
+                          src={product.cover}
+                          alt=""
+                          className=" w-full h-full object-cover rounded-lg"
+                        />
+                      </div>
+                    </span>
+                    <span className="  flex-1 overflow-hidden  flex justify-center items-center  text-ellipsis relative">
+                      <p className=" absolute">{product.itemName}</p>
+                    </span>
+                    <span className="   flex-[.7] flex justify-center items-center  text-ellipsis relative">
+                      <p className=" absolute font-medium">
+                        {product.quantity}
+                        {product.unit}
+                      </p>
+                    </span>
+                    <span className="  flex-[.7] flex justify-center opacity-70 items-center font-semibold overflow-hidden text-ellipsis relative">
+                      <p className=" "> {product.price}₹</p>
+                    </span>
+                    <span className="  flex-1 overflow-hidden text-ellipsis flex justify-center items-center relative whitespace-nowrap">
+                      <p className=" ">{product.updatedAt.substring(2, 10)}</p>
+                    </span>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>

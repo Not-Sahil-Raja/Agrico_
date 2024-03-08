@@ -15,7 +15,6 @@ const ItemCard = ({ item }) => {
 
   const addCartItem = () => {
     item = { ...item, cartadd: true };
-    console.log(item);
     Dispatch(addToCart(item));
     setaddToCartItem(true);
     setTimeout(() => {
