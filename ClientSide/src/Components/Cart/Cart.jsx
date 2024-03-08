@@ -2,9 +2,12 @@ import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CartCard from "./CartCard";
 import { useState } from "react";
-import { CheckSquare, XCircle } from "lucide-react";
-import { emptyCart } from "../../Apps/cartSlice";
+import { CheckSquare, X, HandCoins } from "lucide-react";
+import { emptyCart, addSellDet } from "../../Apps/cartSlice";
 import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+
+import axios from "axios";
 
 const Cart = () => {
   const [selectedOptions, setSelectedOptions] = useState("Gpay");
@@ -18,6 +21,10 @@ const Cart = () => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [landmark, setLandmark] = useState("");
+
+  //for checkout
+
+  //only used for checkout
 
   const [payDonePop, setPayDonePop] = useState(false);
 
@@ -48,6 +55,16 @@ const Cart = () => {
       total: total + discount + deliveryCharges,
     };
     setPayDetails(paymentDetails);
+    dispatch(addSellDet(paymentDetails));
+    setPayDonePop(true);
+  };
+
+  const PayNow = () => {
+    console.log("Checkout", cartItems);
+    axios.post("http://localhost:3000/api/checkout", cartItems).catch((err) => {
+      console.log("Axios Issue! : ", err);
+    });
+    console.log("PayNow");
     setPayDonePop(true);
     dispatch(emptyCart());
     setName("");
@@ -59,68 +76,132 @@ const Cart = () => {
     setDiscount(0);
     setDeliveryCharges(0);
   };
-  console.log("Payment Submitted", payDetails);
+
   const handleOptionChange = (e) => {
     setSelectedOptions(e.target.value);
   };
 
-  // console.log(cartItems);
   return (
     <>
-      <div className=" bg-[#fffff2] w-full h-[100vh] overflow-hidden pt-[9vh] px-[1vw] pb-[2vh] select-none relative">
-        <div
-          className={`absolute z-50 text-lg h-[40vh] font-Archivo bg-[#f5fdf8] px-[2vw] py-[3vh] rounded-lg font-semibold shadow-inner border border-[#4b4b4b] top-1/2 left-1/2 transition-all ${
-            payDonePop
-              ? "[transform:translate(-50%,-50%)]"
-              : "[transform:translate(-50%,-900%)]"
-          } `}
-        >
-          <XCircle
-            className=" absolute top-[-3%] right-[-5%] bg-white rounded-full cursor-pointer hover:scale-110 transition-all"
-            onClick={() => setPayDonePop(false)}
-          />
-
-          <span className=" flex">
-            <CheckSquare className=" scale-90 " /> Payment Done
-          </span>
-          <div className=" text-base font-medium font-Epilogue flex-col flex justify-evenly h-[80%] items-start">
-            <span>Name: {payDetails.name}</span>
-            <span>email: {payDetails.email}</span>
-            <span>phoneNo: {payDetails.phoneNo}</span>
-            <span>address: {payDetails.address}</span>
-            <span>landmark: {payDetails.landmark}</span>
-            <span>Payment Method: {payDetails.paymentMethod}</span>
-            <span>Total: {payDetails.total} ₹ </span>
+      <motion.div
+        className={`absolute z-50 scale-90 font-WorkSans text-lg h-[50vh] w-[40vw]  bg-[#ffffff]  rounded-lg font-semibold shadow-inner border border-[#00000054] top-1/2 left-1/2 `}
+        animate={{
+          transform: payDonePop
+            ? "translate(-50%,-50%) scale(1) "
+            : "translate(-50%,-900%) scale(0) ",
+          opacity: payDonePop ? 1 : 0,
+        }}
+        transition={{
+          duration: 0.5,
+          type: "spring",
+          stiffness: 100,
+          mass: 0.3,
+          damping: 10,
+          ease: [0.85, 0, 0.15, 1],
+        }}
+      >
+        <div className="w-full h-full relative flex items-center">
+          <div className="w-fit h-fit p-1 top-[2%] left-[2%] absolute ">
+            <X
+              className="cursor-pointer"
+              size={25}
+              onClick={() => setPayDonePop(false)}
+            />
+          </div>
+          <div className=" h-full flex-[1.2] flex justify-center items-center">
+            <div className=" flex flex-col justify-center items-center gap-2">
+              <div className=" bg-[black] p-4 rounded-full ">
+                <HandCoins size={50} className=" text-white" />
+              </div>
+              <div className=" flex flex-col leading-none justify-center items-center">
+                <span className=" text-[#000000af] font-semibold ">Amount</span>
+                <span className=" font-bold">{payDetails.total}₹</span>
+              </div>
+            </div>
+          </div>
+          <div className=" h-[90%] flex-[2] my-4 border-l-2 border-l-[#0000003a]">
+            <div className=" h-[75%] pl-[2%] flex flex-col justify-evenly">
+              <div className=" flex w-full">
+                <span className=" font-medium opacity-80">Receipt Name</span>
+                <span className=" font-semibold ml-auto pr-3">
+                  {payDetails.name}
+                </span>
+              </div>
+              <div className=" flex w-full ">
+                <span className=" font-medium opacity-80">Receipt Email</span>
+                <span className=" font-semibold ml-auto pr-3">
+                  {payDetails.email}
+                </span>
+              </div>
+              <div className=" flex w-full">
+                <span className=" font-medium opacity-80">Receipt PhoneNo</span>
+                <span className=" font-semibold ml-auto pr-3">
+                  {payDetails.phoneNo}
+                </span>
+              </div>
+              <div className=" flex w-full">
+                <span className=" font-medium opacity-80">Receipt Address</span>
+                <span className=" font-semibold ml-auto pr-3">
+                  {payDetails.address}
+                </span>
+              </div>
+              <div className=" flex w-full">
+                <span className=" font-medium opacity-80">
+                  Receipt Landmark
+                </span>
+                <span className=" font-semibold ml-auto pr-3">
+                  {payDetails.landmark}
+                </span>
+              </div>
+              <div className=" flex w-full">
+                <span className=" font-medium opacity-80">Payment Method</span>
+                <span className=" font-semibold ml-auto pr-3">
+                  {payDetails.paymentMethod}
+                </span>
+              </div>
+            </div>
+            <div className=" h-[25%] px-[10%] py-[5%]   flex justify-center items-center">
+              <motion.button
+                className=" bg-[#256d31] text-white w-full h-full rounded-md"
+                whileHover={{ backgroundColor: "#319241" }}
+                whileTap={{ scale: 0.9 }}
+                onClick={PayNow}
+              >
+                Confirm & Pay Now
+              </motion.button>
+            </div>
           </div>
         </div>
-        <div
-          className={`flex w-full h-[full] ${
-            payDonePop ? "pointer-events-none blur" : ""
-          } `}
-        >
+      </motion.div>
+      <motion.div
+        className=" bg-[#fffff2] w-full h-[100vh] overflow-hidden pt-[9vh] px-[1vw] pb-[2vh] select-none relative"
+        style={{
+          filter: payDonePop ? "blur(5px) brightness(50%)" : "blur(0px)",
+        }}
+        transition={{ duration: 0.5, type: "spring", delay: 0.5 }}
+      >
+        <motion.div className={`flex w-full h-[full]`}>
           <div className=" flex-1  h-[88vh]">
             <div className="  flex-col  h-[88vh] px-[4vw] py-[2vh] ">
-              <div className=" h-[60%]  bg-[#0000000e] shadow-inner rounded-lg backdrop-blur-md py-[3vh] relative px-[5vw]  overflow-y-scroll scrollbar-hide flex flex-col gap-[1.5vh]">
+              <motion.div
+                className=" h-[60%]  bg-[#0000000e] shadow-inner rounded-lg backdrop-blur-md py-[3vh] relative px-[5vw]  overflow-y-scroll scrollbar-hide flex flex-col gap-[1.5vh]
+                
+              "
+              >
                 <div className=" text-xl font-Archivo font-semibold pl-[.2vw] ">
                   Order Summary
                 </div>
-                <div
-                  className={`absolute top-1/2 left-1/2 [transform:translate(-50%,-50%)] font-Poppins shadow-inner bg-[#00000017] transition-all px-[1vw] py-[2vh] ${
-                    cartItems.length < 0 ? "scale-100 " : " opacity-0"
-                  }`}
-                >
-                  Add Someting To Cart
-                </div>
-                <AnimatePresence>
-                  {cartItems.length > 0 ? (
-                    cartItems.map((item, index) => (
-                      <CartCard key={index} item={item} />
-                    ))
-                  ) : (
-                    <></>
-                  )}
-                </AnimatePresence>
-              </div>
+
+                {cartItems.length > 0 ? (
+                  cartItems.map((item, index) => (
+                    <CartCard key={index} item={item} />
+                  ))
+                ) : (
+                  <>
+                    <div>Cart Is Empty</div>
+                  </>
+                )}
+              </motion.div>
 
               <div className=" bg-[#d8d8d850] mt-[3vh] h-[35%] w-full rounded-lg">
                 <div></div>
@@ -288,7 +369,9 @@ const Cart = () => {
                       required
                       type="submit"
                       value={
-                        "Pay " + (total + discount + deliveryCharges) + ".00 ₹"
+                        "Proceed To Pay " +
+                        (total + discount + deliveryCharges) +
+                        ".00 ₹"
                       }
                       className=" bg-[#1d3128] text-[white] font-Archivo rounded-md mt-[2vh] p-[1vh] w-full cursor-pointer hover:bg-[#476e5d] transition-all"
                       disabled={cartItems.length === 0}
@@ -298,8 +381,8 @@ const Cart = () => {
               </form>
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 };

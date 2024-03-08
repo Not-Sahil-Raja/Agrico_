@@ -6,18 +6,21 @@ import { removeFromCart } from "../../Apps/cartSlice";
 import { motion } from "framer-motion";
 
 const CartCard = ({ item }) => {
-  //feature not working-->
   const dispatch = useDispatch();
-  // const [priceAdd, setPriceAdd] = useState(false);
-  // if (priceAdd) {
-  //   item = { ...item, cartadd: true };
-  //   dispatch(updateCart(item));
-  // }
 
   return (
     <>
       <motion.div
-        className=" bg-[#00000010] flex justify-between items-center px-[2vw] py-[1vh] my-[1vh] rounded-md shadow-md bg-opacity-80 backdrop-blur-sm"
+        className=" bg-[#ffffff] border border-[#0000004b] flex justify-between items-center px-[2vw] py-[1vh] my-[1vh] rounded-md shadow-md bg-opacity-80 backdrop-blur-sm"
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -100 }}
+        transition={{
+          duration: 0.5,
+          type: "spring",
+          stiffness: 100,
+          delay: 0.1,
+        }}
         layout
       >
         <div className="w-[65%] overflow-hidden text-ellipsis">
