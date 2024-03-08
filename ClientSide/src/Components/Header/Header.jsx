@@ -4,8 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { userlogout } from "../../Apps/userInfoslice.js";
-import { ShoppingCart, MoveUpRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { ShoppingCart, ChevronDown, ChevronUp, LogOut } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 // import Agrico_logo from "../../Images/Agrico_logo.png";
 
 const Header = () => {
@@ -16,6 +16,7 @@ const Header = () => {
   };
 
   const [logoAnim, setLogoAnim] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const userDet = useSelector((state) => state.userInfo.userInfo);
   // console.log(userDet);
@@ -129,42 +130,92 @@ const Header = () => {
           MarketPlace
         </NavLink>
       </div>
-      <div className=" flex gap-[1vw] items-center">
-        <NavLink
-          className={() =>
-            `w-[22%] h-[4vh] flex justify-center items-center rounded bg-[#dbdbdbdc] overflow-hidden cursor-pointer border border-oliveGreen hover:bg-oliveGreen transition-all hover:text-[white]`
-          }
-          to="/cart"
-        >
-          <ShoppingCart className=" aspect-square   w-full h-[4vh] p-[.8vh] " />
-        </NavLink>
+      <div
+        className=" flex gap-[1vw] items-center justify-evenly  px-[.5vw] "
 
-        <span className="  overflow-hidden text-white hover:brightness-90 w-[6vw] h-[5vh] relative flex items-center justify-center rounded-sm cursor-pointer transition-all">
-          <button
-            className={`top-1/2 left-1/2 bg-[#b35e5e] absolute transition-transform w-full h-full flex items-center justify-center  ${
-              userDet.username
-                ? " [transform:translate(-50%,-50%)]"
-                : "[transform:translate(-200%,-50%)]"
-            }`}
-            onClick={logout}
+        // onMouseLeave={() => setShowMenu(false)}
+      >
+        <AnimatePresence>
+          <div
+            className="text-white hover:brightness-90 w-fit h-full relative flex items-center justify-center rounded-sm cursor-pointer transition-all"
+            onClick={() => setShowMenu(!showMenu)}
           >
-            {userDet.show}
-          </button>
-          <NavLink
-            to="/login"
-            className={() =>
-              ` top-1/2 left-1/2 bg-oliveGreen absolute transition-transform  w-full h-full flex items-center justify-center  ${
-                userDet.username
-                  ? "[transform:translate(100%,-50%)]"
-                  : "[transform:translate(-50%,-50%)]"
-              }`
-            }
-          >
-            Login
-          </NavLink>
-        </span>
+            <div className=" flex flex-wrap flex-col items-start font-WorkSans border w-fit px-2 py-[2%] rounded-md bg-[#000000ab] relative">
+              <span className=" leading-none text-base font-[300]">Hello,</span>
 
-        <UserRound className=" aspect-square bg-[#e6e6e6fb] drop-shadow shadow-inner text-[#353535] hover:backdrop-blur-sm rounded-[50%] transition-all cursor-pointer p-1 scale-110 hover:scale-125" />
+              <>
+                <span className=" text-sm font-medium leading-none flex">
+                  {userDet.username ? userDet.username : "SignIn/Up"}
+                  {showMenu ? (
+                    <ChevronUp size={15} />
+                  ) : (
+                    <ChevronDown size={15} />
+                  )}
+                </span>
+                <motion.div
+                  className=" absolute w-7 h-7 rounded -bottom-[120%]  backdrop-blur-md left-1/2 [transform:translate(-50%,-0%)]"
+                  style={{ pointerEvents: showMenu ? "all" : "none" }}
+                >
+                  <motion.div
+                    className=" w-full h-full bg-[#fffdfd] rounded font-WorkSans text-base"
+                    animate={{
+                      opacity: showMenu ? 1 : 0,
+                      height: showMenu ? "auto" : 0,
+                    }}
+                  >
+                    <AnimatePresence>
+                      {userDet.username ? (
+                        <motion.button
+                          className={`top-1/2 left-1/2 bg-[#cf3e3e] gap-2 absolute transition-transform w-24 h-7 flex items-center justify-center border rounded ${
+                            userDet.username
+                              ? " [transform:translate(-50%,-50%)]"
+                              : "[transform:translate(-200%,-50%)]"
+                          }`}
+                          exit={{ transform: "translate(-200%,-90%)" }}
+                          onClick={logout}
+                        >
+                          Logout
+                          <LogOut size={17} />
+                        </motion.button>
+                      ) : (
+                        <NavLink
+                          to="/login"
+                          className={() =>
+                            ` top-1/2 left-1/2 bg-oliveGreen absolute transition-transform  w-[7vw] h-7 flex items-center justify-center border rounded ${
+                              userDet.username
+                                ? "[transform:translate(100%,-50%)]"
+                                : "[transform:translate(-50%,-50%)]"
+                            }`
+                          }
+                        >
+                          Login
+                        </NavLink>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                </motion.div>
+              </>
+            </div>
+          </div>
+
+          {/* cart Area */}
+          <motion.div
+            className=" h-[2.4rem] font-WorkSans bg-[#000000ab] rounded-md"
+            whileHover={{ backgroundColor: "#000000" }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+          >
+            <NavLink
+              className="w-full h-full flex gap-2 justify-center items-center  border px-3 rounded-md"
+              to="/cart"
+            >
+              <ShoppingCart size={22} className=" text-white" />
+              <span className=" opacity-90 text-white font-normal text-sm">
+                {" "}
+                Cart
+              </span>
+            </NavLink>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

@@ -82,7 +82,7 @@ const Cart = () => {
   };
 
   return (
-    <>
+    <div className=" overflow-hidden">
       <motion.div
         className={`absolute z-50 scale-90 font-WorkSans text-lg h-[50vh] w-[40vw]  bg-[#ffffff]  rounded-lg font-semibold shadow-inner border border-[#00000054] top-1/2 left-1/2 `}
         animate={{
@@ -179,6 +179,17 @@ const Cart = () => {
           filter: payDonePop ? "blur(5px) brightness(50%)" : "blur(0px)",
         }}
         transition={{ duration: 0.5, type: "spring", delay: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: {
+            duration: 0.5,
+            type: "spring",
+            delay: 0.1,
+            ease: "easeInOut",
+            stiffness: 100,
+          },
+        }}
       >
         <motion.div className={`flex w-full h-[full]`}>
           <div className=" flex-1  h-[88vh]">
@@ -383,7 +394,7 @@ const Cart = () => {
           </div>
         </motion.div>
       </motion.div>
-    </>
+    </div>
   );
 };
 
