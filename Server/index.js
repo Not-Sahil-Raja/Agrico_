@@ -35,3 +35,8 @@ connectDB()
   .catch((err) => {
     console.log("MongoDB Connection failed ! ", err);
   });
+
+app.get("/", (req, res) => {
+  res.send("LOL");
+  console.log("listening on port 8000");
+});
