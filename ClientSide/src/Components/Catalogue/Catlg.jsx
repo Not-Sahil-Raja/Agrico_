@@ -105,7 +105,7 @@ function Catlg() {
                 </span>
               </div>
               {PopularCourses.length > 0 ? (
-                <div className=" grid md:grid-cols-4 sm:grid-cols-2 gap-6 ">
+                <div className=" grid md:grid-cols-4 sm:grid-cols-2 md:gap-3 2xl:gap-5 place-items-center">
                   {PopularCourses.map((item) => (
                     <Item
                       key={item.id}
