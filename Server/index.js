@@ -22,6 +22,12 @@ app.use("/api/", items);
 app.use("/api/", courses);
 app.use("/api/", dashboard);
 app.use("/api/", checkoutit);
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the Agrico API!");
+  console.log("Root URL accessed !");
+});
+
 connectDB()
   .then(() => {
     app.listen(process.env.PORT || 8000, () => {
