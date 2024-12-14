@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { UserRound } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { userlogout } from "../../Apps/userInfoslice.js";
 import { ShoppingCart, ChevronDown, ChevronUp, LogOut } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-// import Agrico_logo from "../../Images/Agrico_logo.png";
 
 const Header = () => {
   const Dispatch = useDispatch();
@@ -135,87 +133,81 @@ const Header = () => {
 
         // onMouseLeave={() => setShowMenu(false)}
       >
-        <AnimatePresence>
-          <div
-            className="text-white hover:brightness-90 w-fit h-full relative flex items-center justify-center rounded-sm cursor-pointer transition-all"
-            onClick={() => setShowMenu(!showMenu)}
-          >
-            <div className=" flex flex-wrap flex-col items-start font-WorkSans border w-fit px-2 py-[2%] rounded-md bg-[#000000ab] relative">
-              <span className=" leading-none text-base font-[300]">Hello,</span>
+        <div
+          className="text-white hover:brightness-90 w-fit h-full relative flex items-center justify-center rounded-sm cursor-pointer transition-all"
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          <div className=" flex flex-wrap flex-col items-start font-WorkSans border w-fit px-2 py-[2%] rounded-md bg-[#000000ab] relative">
+            <span className=" leading-none text-base font-[300]">Hello,</span>
 
-              <>
-                <span className=" text-sm font-medium leading-none flex">
-                  {userDet.username ? userDet.username : "SignIn/Up"}
-                  {showMenu ? (
-                    <ChevronUp size={15} />
-                  ) : (
-                    <ChevronDown size={15} />
-                  )}
-                </span>
-                <motion.div
-                  className=" absolute w-7 h-7 rounded -bottom-[120%]  backdrop-blur-md left-1/2 [transform:translate(-50%,-0%)]"
-                  style={{ pointerEvents: showMenu ? "all" : "none" }}
-                >
-                  <motion.div
-                    className=" w-full h-full bg-[#fffdfd] rounded font-WorkSans text-base"
-                    animate={{
-                      opacity: showMenu ? 1 : 0,
-                      height: showMenu ? "auto" : 0,
-                    }}
-                  >
-                    <AnimatePresence>
-                      {userDet.username ? (
-                        <motion.button
-                          className={`top-1/2 left-1/2 bg-[#cf3e3e] gap-2 absolute transition-transform w-24 h-7 flex items-center justify-center border rounded ${
-                            userDet.username
-                              ? " [transform:translate(-50%,-50%)]"
-                              : "[transform:translate(-200%,-50%)]"
-                          }`}
-                          exit={{ transform: "translate(-200%,-90%)" }}
-                          onClick={logout}
-                        >
-                          Logout
-                          <LogOut size={17} />
-                        </motion.button>
-                      ) : (
-                        <NavLink
-                          to="/login"
-                          className={() =>
-                            ` top-1/2 left-1/2 bg-oliveGreen absolute transition-transform  w-[7vw] h-7 flex items-center justify-center border rounded ${
-                              userDet.username
-                                ? "[transform:translate(100%,-50%)]"
-                                : "[transform:translate(-50%,-50%)]"
-                            }`
-                          }
-                        >
-                          Login
-                        </NavLink>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                </motion.div>
-              </>
-            </div>
-          </div>
-
-          {/* cart Area */}
-          <motion.div
-            className=" h-[2.4rem] font-WorkSans bg-[#000000ab] rounded-md"
-            whileHover={{ backgroundColor: "#000000" }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-          >
-            <NavLink
-              className="w-full h-full flex gap-2 justify-center items-center  border px-3 rounded-md"
-              to="/cart"
-            >
-              <ShoppingCart size={22} className=" text-white" />
-              <span className=" opacity-90 text-white font-normal text-sm">
-                {" "}
-                Cart
+            <>
+              <span className=" text-sm font-medium leading-none flex">
+                {userDet.username ? userDet.username : "SignIn/Up"}
+                {showMenu ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
               </span>
-            </NavLink>
-          </motion.div>
-        </AnimatePresence>
+              <motion.div
+                className=" absolute w-7 h-7 rounded -bottom-[120%]  backdrop-blur-md left-1/2 [transform:translate(-50%,-0%)]"
+                style={{ pointerEvents: showMenu ? "all" : "none" }}
+              >
+                <motion.div
+                  className=" w-full h-full bg-[#fffdfd] rounded font-WorkSans text-base"
+                  animate={{
+                    opacity: showMenu ? 1 : 0,
+                    height: showMenu ? "auto" : 0,
+                  }}
+                >
+                  <AnimatePresence>
+                    {userDet.username ? (
+                      <motion.button
+                        className={`top-1/2 left-1/2 bg-[#cf3e3e] gap-2 absolute transition-transform w-24 h-7 flex items-center justify-center border rounded ${
+                          userDet.username
+                            ? " [transform:translate(-50%,-50%)]"
+                            : "[transform:translate(-200%,-50%)]"
+                        }`}
+                        exit={{ transform: "translate(-200%,-90%)" }}
+                        onClick={logout}
+                      >
+                        Logout
+                        <LogOut size={17} />
+                      </motion.button>
+                    ) : (
+                      <NavLink
+                        to="/login"
+                        className={() =>
+                          ` top-1/2 left-1/2 bg-oliveGreen absolute transition-transform  w-[7vw] h-7 flex items-center justify-center border rounded ${
+                            userDet.username
+                              ? "[transform:translate(100%,-50%)]"
+                              : "[transform:translate(-50%,-50%)]"
+                          }`
+                        }
+                      >
+                        Login
+                      </NavLink>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </motion.div>
+            </>
+          </div>
+        </div>
+
+        {/* cart Area */}
+        <motion.div
+          className=" h-[2.4rem] font-WorkSans bg-[#000000ab] rounded-md"
+          whileHover={{ backgroundColor: "#000000" }}
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+        >
+          <NavLink
+            className="w-full h-full flex gap-2 justify-center items-center  border px-3 rounded-md"
+            to="/cart"
+          >
+            <ShoppingCart size={22} className=" text-white" />
+            <span className=" opacity-90 text-white font-normal text-sm">
+              {" "}
+              Cart
+            </span>
+          </NavLink>
+        </motion.div>
       </div>
     </div>
   );
