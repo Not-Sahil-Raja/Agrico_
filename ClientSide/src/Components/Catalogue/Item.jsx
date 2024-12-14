@@ -12,8 +12,8 @@ function Item(props) {
         " flex flex-col justify-center h-fit rounded-xl cursor-pointer bg-[#f8f8f8] p-2 font-Archivo border"
       }
       onClick={() => {
-        navigate("/demo", {
-          state: { name: props.cat, no: props.no, back: props.back },
+        navigate(`/course`, {
+          state: { name: props.cat, no: props.no },
         });
       }}
     >

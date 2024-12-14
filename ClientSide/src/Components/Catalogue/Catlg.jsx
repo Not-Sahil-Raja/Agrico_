@@ -110,6 +110,7 @@ function Catlg() {
                     <Item
                       key={item.id}
                       id={item.id}
+                      no={item.no}
                       cat={item.cat}
                       back={item.back}
                       rating={item.rating}

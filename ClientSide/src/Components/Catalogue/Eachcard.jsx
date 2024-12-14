@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { CheckCircle2, ChevronDown } from "lucide-react";
@@ -7,8 +7,6 @@ import { CheckCircle2, ChevronDown } from "lucide-react";
 const Eachcard = () => {
   const location = useLocation();
   const [info, setInfo] = useState({});
-  const [arr, setArr] = useState([]);
-  // console.log(location.state.no);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_SERVER}/courses/${location.state.no}`)
@@ -16,10 +14,9 @@ const Eachcard = () => {
         setInfo(res.data);
       });
   }, []);
-  // console.log(location.state.name);
   return (
-    <div className=" bg-[#fffff2] w-full h-[100vh] select-none overflow-hidden">
-      <div className=" w-full h-[90%] mt-[10vh] px-[1vw] py-[2vh] flex flex-evenly">
+    <div className=" bg-[#fffff2] w-full  select-none ">
+      <div className=" w-full h-[90%] mt-[5vh] px-[1vw] py-[2vh] flex flex-evenly">
         <div className=" flex-1">
           {/* left side */}
           <div className=" h-full  mx-[1vw] flex flex-col px-[1vw] py-[2vh] gap-[2vh] overflow-y-scroll scrollbar-hide">
@@ -41,18 +38,18 @@ const Eachcard = () => {
             </div>
           </div>
         </div>
-        <div className=" flex-[2.5] px-[1vw] py-[2vh]">
+        <div className=" flex-[2.5] px-[1vw] py-[2vh] mb-10">
           {/* middle area */}
           <div className=" w-full h-full px-[2vw] py-[2vh] flex flex-col gap-[5vh]">
-            <div className=" w-full h-[60%] bg-red-200 rounded-xl">
+            <div className=" w-full aspect-video bg-red-200 rounded-xl">
               <iframe
-                src={info.link}
+                src={info.link ? info.link : ""}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 className=" w-full h-full rounded-xl"
               />
             </div>
-            <div className=" w-full h-[30%] border-[#2929294f] border flex flex-col justify-top items-center rounded-lg overflow-scroll px-8 font-Epilogue scrollbar-hide">
+            <div className=" w-full h-fit border-[#2929294f] border flex flex-col justify-top items-center rounded-lg  px-8 font-Epilogue scrollbar-hide">
               <span className=" text-3xl font-Archivo font-semibold mt-[3vh]">
                 Important Points
               </span>
