@@ -19,7 +19,7 @@ const Header = () => {
   const userDet = useSelector((state) => state.userInfo.userInfo);
   // console.log(userDet);
   return (
-    <div className="  bg-[#bdb9a788] backdrop-blur-md px-[3vw] fixed top-0 w-[100vw] flex font-Archivo text-lg text-[#2b1c1c] font-[570] justify-around items-center drop-shadow-md gap-[5vw] z-50">
+    <div className="  bg-[#ffffffd3] backdrop-blur-md px-[3vw] fixed top-0 w-[100vw] flex font-Archivo text-lg text-[#2b1c1c] font-[570] justify-around items-center drop-shadow-md gap-[5vw] z-50">
       <div className="  w-[10vw]  h-[5.8vh] mr-auto rounded-2xl px-[1vw] flex  justify-evenly items-center  ">
         <Link className=" py-[.5vh]  px-[.35vw] text-center flex-1 flex  h-full items-center justify-center relative">
           <motion.div
@@ -28,7 +28,7 @@ const Header = () => {
             onHoverEnd={() => setLogoAnim(!logoAnim)}
           >
             <motion.div
-              className=" flex items-center justify-center absolute w-full h-full top-1/2 left-1/2 [transform:translate(-50%,-50%)]"
+              className=" flex items-center justify-center  absolute w-full h-full top-1/2 left-1/2 [transform:translate(-50%,-50%)]"
               animate={{
                 transform: logoAnim
                   ? "translate(-50%,-160%)"
@@ -36,7 +36,7 @@ const Header = () => {
               }}
               transition={{ duration: 0.25, ease: "easeInOut" }}
             >
-              <span className=" font-Montserrat font-semibold opacity-75 text-[white]">
+              <span className=" font-Montserrat font-semibold mix-blend-color-dodge">
                 AgriCo
               </span>
               <svg
@@ -45,11 +45,11 @@ const Header = () => {
                 height="15"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="white"
+                stroke="black"
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="lucide lucide-move-up-right opacity-75"
+                className="lucide lucide-move-up-right mix-blend-multiply"
               >
                 <path d="M13 5H19V11" />
                 <path d="M19 5L5 19" />
@@ -64,7 +64,7 @@ const Header = () => {
               }}
               transition={{ duration: 0.25, ease: "easeInOut" }}
             >
-              <span className=" font-Montserrat font-semibold text-[white]">
+              <span className=" font-Montserrat font-semibold mix-blend-multiply">
                 AgriCo
               </span>
               <svg
@@ -73,11 +73,11 @@ const Header = () => {
                 height="15"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="white"
+                stroke="black"
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="lucide lucide-move-up-right"
+                className="lucide lucide-move-up-right "
               >
                 <path d="M13 5H19V11" />
                 <path d="M19 5L5 19" />
@@ -126,6 +126,18 @@ const Header = () => {
           }
         >
           MarketPlace
+        </NavLink>
+        <NavLink
+          to="/createblog"
+          className={({ isActive }) =>
+            ` px-4 py-[.35vh] rounded-2xl flex items-center justify-center ${
+              isActive
+                ? "bg-[#578d60] text-white shadow-inner"
+                : "text-[#353535] border-transparent hover:backdrop-blur-sm"
+            }`
+          }
+        >
+          <span>Create +</span>
         </NavLink>
       </div>
       <div
