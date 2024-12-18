@@ -90,9 +90,8 @@ const SellItem = () => {
     formData.append("contact", contactNumber);
     formData.append("location", location);
     formData.append("cover", cover);
-    // console.log(formData);
+
     axios
-      // .post(`http://localhost:3000/api/Allitems`, formData) //for checking with local server
       .post(`${import.meta.env.VITE_SERVER}/Allitems`, formData)
       .then((res) => {
         console.log(res.data);
@@ -115,10 +114,6 @@ const SellItem = () => {
       .catch((err) => {
         console.log(err);
       });
-
-    // console.log(
-    //   "Item Added Axios Not Running rn!!(Although Backend is Connected)"
-    // );
   };
   return (
     <>
@@ -342,7 +337,7 @@ const SellItem = () => {
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
                             required
-                            readOnly={true}
+                            // readOnly={true}
                           />
                         </div>
                       </div>

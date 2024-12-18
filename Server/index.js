@@ -7,6 +7,7 @@ import items from "./src/routes/items.route.js";
 import courses from "./src/routes/courses.route.js";
 import dashboard from "./src/routes/dashboard.route.js";
 import checkoutit from "./src/routes/checkout.route.js";
+import LessonPost from "./src/routes/lessonPost.route.js";
 
 dotenv.config({
   path: "../env",
@@ -22,6 +23,7 @@ app.use("/api/", items);
 app.use("/api/", courses);
 app.use("/api/", dashboard);
 app.use("/api/", checkoutit);
+app.use("/api/lesson/", LessonPost);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Agrico API!");
@@ -41,8 +43,3 @@ connectDB()
   .catch((err) => {
     console.log("MongoDB Connection failed ! ", err);
   });
-
-app.get("/", (req, res) => {
-  res.send("LOL");
-  console.log("listening on port 8000");
-});

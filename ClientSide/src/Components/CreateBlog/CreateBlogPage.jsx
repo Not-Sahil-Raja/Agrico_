@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Plus, Tag, X } from "lucide-react";
+import { ArrowUpRightIcon, Plus, Tag, X } from "lucide-react";
 import BlogPreview from "./BlogPreview";
+import axios from "axios";
+import { BlogSubmissionToast } from "./BlogSubmissionToast";
+import { AnimatePresence } from "framer-motion";
+import { BlogSubmissionFailedToast } from "./BlogSubmissionFailedToast";
 
 const CreateBlogPage = () => {
   const [title, setTitle] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState([]);
   const [currentTag, setCurrentTag] = useState("");
   const [image, setImage] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [response, setResponse] = useState(null);
 
   const modules = {
     toolbar: [
@@ -40,10 +49,64 @@ const CreateBlogPage = () => {
     "image",
   ];
 
+  const blogCreateHandler = () => {
+    setIsLoading(true);
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("username", "username");
+    formData.append("shortDescription", shortDescription);
+    formData.append("description", description);
+    formData.append("tags", tags);
+    formData.append("category", "lesson");
+
+    for (let i = 0; i < image.length; i++) {
+      formData.append("image", image[i]);
+    }
+
+    axios
+      .post(`${import.meta.env.VITE_SERVER}/lesson/create`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        setResponse(true);
+        console.log(res.data);
+        setTitle("");
+        setShortDescription("");
+        setDescription("");
+        setTags([]);
+        setCurrentTag("");
+        setImage([]);
+      })
+      .catch((err) => {
+        console.log(err);
+        setResponse(false);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setTimeout(() => {
+          setResponse(null);
+        }, 5000);
+      });
+  };
+
   return (
-    <div className=" w-full h-fit min-h-svh bg-zinc-200 pt-[9vh] pb-[3vh] flex">
-      <div className=" flex-[1.5] max-w-[50vw]">
-        <div className=" bg-white ml-10 mr-3 rounded-md h-fit 2xl:ml-[10vw]">
+    <div className="w-full h-fit min-h-svh bg-gradient-to-r from-zinc-100 via-gray-300 to-zinc-300 pt-[9vh] pb-[3vh] flex relative">
+      <div>
+        <AnimatePresence>
+          {response === true && <BlogSubmissionToast />}
+          {response === false && <BlogSubmissionFailedToast />}
+        </AnimatePresence>
+      </div>
+
+      <div
+        className={` flex-[1.5] max-w-[50vw] ${
+          isLoading && "pointer-events-none"
+        }`}
+      >
+        <div className=" bg-white ml-10 mr-3 rounded-md h-fit 2xl:ml-[10vw] font-Archivo">
           <div className=" w-full h-[10%] border-b-2 px-3 py-1">
             <h1 className="text-xl font-semibold pb-3">Create Blog</h1>
           </div>
@@ -59,6 +122,24 @@ const CreateBlogPage = () => {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
+            <div className=" border px-3 py-2 rounded-xl">
+              <label className=" uppercase font-semibold text-black/85">
+                Short Description
+              </label>
+              <input
+                type="text"
+                className="w-full border border-gray-300 rounded-md py-1 px-3 mt-1"
+                value={shortDescription}
+                onChange={(e) => setShortDescription(e.target.value)}
+                minLength={50}
+                maxLength={150}
+                required
+              />
+              <p className=" pl-4 text-sm font-semibold text-[#686880] select-none py-1">
+                ** Short description should be between 50 to 150 characters. ({" "}
+                {shortDescription.length}/150 )
+              </p>
+            </div>
             <div className=" border px-3 py-2 rounded-xl ">
               <label className=" uppercase font-semibold text-black/85 ">
                 Description
@@ -70,6 +151,7 @@ const CreateBlogPage = () => {
                 className=" min-h-1/2"
                 modules={modules}
                 formats={formats}
+                value={description}
               />
             </div>
             <div className="border px-3 py-2 rounded-xl">
@@ -136,12 +218,7 @@ const CreateBlogPage = () => {
                     className=" hidden w-full h-full disabled:cursor-not-allowed peer"
                     onChange={(e) => {
                       const files = e.target.files;
-                      const urls = [];
-                      for (let i = 0; i < files.length; i++) {
-                        const url = URL.createObjectURL(files[i]);
-                        urls.push(url);
-                      }
-                      setImage([...image, ...urls]);
+                      setImage([...image, ...files]);
                     }}
                     disabled={image.length >= 3}
                   />
@@ -153,7 +230,7 @@ const CreateBlogPage = () => {
                 {image.map((img, index) => (
                   <div key={index} className="flex gap-2 items-center relative">
                     <img
-                      src={img}
+                      src={img && img.name ? URL.createObjectURL(img) : img}
                       alt="image"
                       className="w-32 aspect-square object-cover rounded-md"
                     />
@@ -171,8 +248,26 @@ const CreateBlogPage = () => {
             </div>
           </div>
           <div className=" px-7 py-2 flex justify-end ">
-            <button className="w-fit bg-[#f3f3f3] border border-stone-500 text-stone-900 shadow-md py-2 px-4 rounded-md font-medium mb-4">
-              Create
+            <button
+              className="w-fit bg-[#BFE459] disabled:opacity-65 border border-stone-500 text-stone-900 shadow-md py-2 px-4 rounded-md font-medium mb-4"
+              onClick={blogCreateHandler}
+              disabled={
+                isLoading ||
+                title.length === 0 ||
+                shortDescription.length === 0 ||
+                description.length === 0 ||
+                tags.length === 0 ||
+                image.length === 0
+              }
+            >
+              {
+                // eslint-disable-next-line no-nested-ternary
+                isLoading
+                  ? "Creating..."
+                  : response
+                  ? "Blog Created"
+                  : "Create Blog"
+              }
             </button>
           </div>
         </div>
@@ -180,6 +275,7 @@ const CreateBlogPage = () => {
       <div className=" max-w-[45vw] overflow-hidden flex-1 bg-white rounded mr-10 px-5 py-5">
         <BlogPreview
           title={title}
+          shortDescription={shortDescription}
           description={description}
           tags={tags}
           image={image}

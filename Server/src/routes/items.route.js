@@ -20,10 +20,9 @@ router.post("/Allitems", upload.single("cover"), async (req, res) => {
     ) {
       return res.status(400).send("Please fill all the fields");
     }
-    console.log(req.file);
-    // console.log(req.files);
+
     const result = await uploadOnCloudinary(req.file.path);
-    console.log(result);
+
     const items = {
       itemName: req.body.itemName,
       itemDescription: req.body.itemDescription,
