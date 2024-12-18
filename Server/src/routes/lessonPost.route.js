@@ -1,5 +1,4 @@
 import express from "express";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import upload from "../middlewares/multer.middleware.js";
 import { LessonPost } from "../models/lessonPost.model.js";
 import { v2 as cloudinary } from "cloudinary";
@@ -9,8 +8,6 @@ const router = express.Router();
 
 router.post("/create", upload.array("image"), async (req, res) => {
   try {
-    console.log("Files: ", req.files);
-    console.log("Body: ", req.body);
     if (
       !req.body.username ||
       !req.body.category ||
@@ -23,14 +20,9 @@ router.post("/create", upload.array("image"), async (req, res) => {
     ) {
       return res.status(400).send("Please fill all the fields");
     }
-
     const UploadedImages = [];
+
     for (let i = 0; i < req.files.length; i++) {
-      // const filePath = path.join(process.cwd(), "tmp", req.files[i].filename);
-      // const result = await uploadOnCloudinary(filePath);
-      // console.log(`Cloudinary Uploaded Link ${i + 1}: `, result);
-      // if (result && result.url) UploadedImages.push(result.url);
-      // fs.unlinkSync(filePath);
       const file = req.files[i];
       const result = await new Promise((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
@@ -45,7 +37,7 @@ router.post("/create", upload.array("image"), async (req, res) => {
         );
         streamifier.createReadStream(file.buffer).pipe(uploadStream);
       });
-      console.log(`Cloudinary Uploaded Link ${i + 1}: `, result);
+
       if (result && result.secure_url) UploadedImages.push(result.secure_url);
     }
 

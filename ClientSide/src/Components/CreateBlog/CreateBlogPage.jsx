@@ -65,15 +65,13 @@ const CreateBlogPage = () => {
     }
 
     axios
-      // .post(`${import.meta.env.VITE_SERVER}/lesson/create`, formData, {
-      .post(`https://agrico-backend.vercel.app/api/lesson/create`, formData, {
+      .post(`${import.meta.env.VITE_SERVER}/lesson/create`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
         setResponse(true);
-        console.log(res.data);
         setTitle("");
         setShortDescription("");
         setDescription("");
@@ -82,8 +80,8 @@ const CreateBlogPage = () => {
         setImage([]);
       })
       .catch((err) => {
-        console.log(err);
         setResponse(false);
+        console.log(err);
       })
       .finally(() => {
         setIsLoading(false);
