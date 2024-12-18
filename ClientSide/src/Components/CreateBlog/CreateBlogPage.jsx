@@ -65,7 +65,8 @@ const CreateBlogPage = () => {
     }
 
     axios
-      .post(`${import.meta.env.VITE_SERVER}/lesson/create`, formData, {
+      // .post(`${import.meta.env.VITE_SERVER}/lesson/create`, formData, {
+      .post(`https://agrico-backend.vercel.app/api/lesson/create`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
