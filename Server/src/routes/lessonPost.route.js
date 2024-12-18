@@ -24,9 +24,11 @@ router.post("/create", upload.array("image"), async (req, res) => {
 
     const UploadedImages = [];
     for (let i = 0; i < req.files.length; i++) {
-      const result = await uploadOnCloudinary(req.files[i].path);
+      const filePath = path.join(process.cwd(), "tmp", req.files[i].filename);
+      const result = await uploadOnCloudinary(filePath);
       console.log(`Cloudinary Uploaded Link ${i + 1}: `, result);
       if (result && result.url) UploadedImages.push(result.url);
+      fs.unlinkSync(filePath);
     }
 
     if (UploadedImages.length !== req.files.length) {

@@ -18,5 +18,10 @@
         "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
       }
     }
-  ]
+  ],
+  "functions": {
+    "api/*": {
+      "includeFiles": "tmp/*"
+    }
+  }
 }
