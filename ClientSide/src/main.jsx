@@ -16,6 +16,7 @@ import Cart from "./Components/Cart/Cart.jsx";
 import Eachcard from "./Components/Catalogue/Eachcard.jsx";
 import SellItem from "./Components/MarketPlace/SellItem.jsx";
 import CreateBlogPage from "./Components/CreateBlog/CreateBlogPage.jsx";
+import { ClerkProvider } from "@clerk/clerk-react";
 
 const router = createBrowserRouter([
   {
@@ -64,8 +65,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key");
+}
+
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+  <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </ClerkProvider>
 );

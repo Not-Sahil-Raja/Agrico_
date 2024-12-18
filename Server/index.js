@@ -9,6 +9,11 @@ import dashboard from "./src/routes/dashboard.route.js";
 import checkoutit from "./src/routes/checkout.route.js";
 import LessonPost from "./src/routes/lessonPost.route.js";
 
+import {
+  ClerkExpressRequireAuth,
+  ClerkExpressWithAuth,
+} from "@clerk/clerk-sdk-node";
+
 dotenv.config({
   path: "../env",
 });
@@ -18,6 +23,13 @@ const app = express();
 app.use(cors({}));
 app.use(express.json());
 
+app.use(ClerkExpressRequireAuth());
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(401).send("Unauthorized access!");
+});
+
 app.use("/api/", users);
 app.use("/api/", items);
 app.use("/api/", courses);
@@ -25,7 +37,7 @@ app.use("/api/", dashboard);
 app.use("/api/", checkoutit);
 app.use("/api/lesson/", LessonPost);
 
-app.get("/", (req, res) => {
+app.get("/", ClerkExpressWithAuth(), (req, res) => {
   res.send("Welcome to the Agrico API!");
   console.log("Root URL accessed !");
 });

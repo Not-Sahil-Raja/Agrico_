@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { ArrowUpRightIcon, Plus, Tag, X } from "lucide-react";
+import { Plus, Tag, X } from "lucide-react";
 import BlogPreview from "./BlogPreview";
 import axios from "axios";
 import { BlogSubmissionToast } from "./BlogSubmissionToast";
 import { AnimatePresence } from "framer-motion";
 import { BlogSubmissionFailedToast } from "./BlogSubmissionFailedToast";
+
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useAuth,
+} from "@clerk/clerk-react";
 
 const CreateBlogPage = () => {
   const [title, setTitle] = useState("");
@@ -48,8 +56,10 @@ const CreateBlogPage = () => {
     "link",
     "image",
   ];
+  const { getToken } = useAuth();
+  const blogCreateHandler = async () => {
+    const token = await getToken();
 
-  const blogCreateHandler = () => {
     setIsLoading(true);
     const formData = new FormData();
 
@@ -68,6 +78,7 @@ const CreateBlogPage = () => {
       .post(`${import.meta.env.VITE_SERVER}/lesson/create`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {

@@ -20,7 +20,7 @@ const AgricoLogo = () => {
           transition={{ duration: 0.5, easings: [0.83, 0, 0.17, 1] }}
         >
           <img
-            src="/public/vite.svg"
+            src="/vite.svg"
             alt="Vite Logo"
             className=" w-5 object-cover"
             initial={{ opacity: 0 }}
