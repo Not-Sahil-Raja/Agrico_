@@ -21,7 +21,6 @@ const MarketPlace = () => {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
 
-  console.log(`${import.meta.env.VITE_SERVER}/itemsList`);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_SERVER}/itemsList`)

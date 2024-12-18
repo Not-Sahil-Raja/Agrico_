@@ -1,18 +1,14 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import AboutUs from "../AboutUs/AboutUs";
-import ContactUs from "../ContactUs/ContactUs";
 import { useNavigate } from "react-router-dom";
 import WhyChooseUs from "./WhyChooseUs";
 import OurProductDetails from "./OurProductDetails";
-import wheatVector from "../../../public/wheat_vector.png";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRightIcon } from "lucide-react";
+import { ArrowUpRightIcon } from "lucide-react";
 import Reviews from "./Reviews";
 import Footer from "./FooterPage";
 gsap.registerPlugin(ScrollTrigger);
-// import bgvideo from "../../../public/pexels_videos_1324936 (1440p).mp4";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -20,100 +16,6 @@ const Homepage = () => {
   const p2 = useRef(null);
   const p3 = useRef(null);
   const bgvideo = "./pexels_videos_1324936 (1440p).mp4";
-
-  // useLayoutEffect(() => {
-  //   let ctx = gsap.context(() => {
-  //     const t1 = gsap.timeline();
-  //     const t2 = gsap.timeline();
-  //     const t3 = gsap.timeline();
-  //     const t4 = gsap.timeline();
-
-  //     t1.from("#txt", {
-  //       xPercent: "-200",
-  //       duration: 0.6,
-  //     });
-  //     t2.from("#btun", {
-  //       xPercent: "800",
-  //       duration: 0.5,
-  //       scale: 0,
-  //     });
-
-  //     t3.from(["#abttxt1", "#abttxt2", "#abttxthigh"], {
-  //       xPercent: "-200",
-  //       opacity: 0,
-  //       duration: 0.8,
-  //     })
-  //       .from("#abtright", {
-  //         xPercent: "200",
-  //         opacity: 0,
-  //         duration: 0.5,
-  //       })
-  //       .from("#card1", {
-  //         opacity: 0,
-  //         duration: 0.5,
-  //       })
-  //       .from("#card2", {
-  //         opacity: 0,
-  //         duration: 0.5,
-  //       })
-  //       .from("#card3", {
-  //         opacity: 0,
-  //         duration: 0.5,
-  //       })
-  //       .from("#card4", {
-  //         opacity: 0,
-  //         duration: 0.5,
-  //       });
-
-  //     ScrollTrigger.create({
-  //       trigger: p2.current,
-  //       start: "top 70%",
-  //       end: "bottom 20%",
-  //       animation: t3,
-  //       // markers: true,
-  //       toggleActions: "play pause resume reverse",
-  //     });
-
-  //     t4.from("#conimg", {
-  //       opacity: 0,
-  //       duration: 0.3,
-  //       delay: 0.5,
-  //     })
-  //       .from("#contop", {
-  //         yPercent: "-200",
-  //         opacity: 0,
-  //         duration: 0.5,
-  //       })
-  //       .from("#contxt", {
-  //         xPercent: "-200",
-  //         opacity: 0,
-  //         duration: 0.4,
-  //       })
-  //       .from("#conform", {
-  //         xPercent: "200",
-  //         opacity: 0,
-  //         duration: 0.4,
-  //       })
-  //       .from("#consub", {
-  //         opacity: 0,
-  //         duration: 0.6,
-  //       })
-  //       .from("#conmail", {
-  //         yPercent: "200",
-  //         opacity: 0,
-  //         duration: 0.8,
-  //       });
-  //     ScrollTrigger.create({
-  //       trigger: p3.current,
-  //       start: "top 70%",
-  //       end: "bottom 20%",
-  //       animation: t4,
-  //       // markers: true,
-  //       toggleActions: "play pause resume reverse",
-  //     });
-  //   }, p1);
-  //   return () => ctx.revert();
-  // }, []);
 
   const videoEl = useRef(null);
 
@@ -148,7 +50,6 @@ const Homepage = () => {
           >
             <div className="w-full h-full absolute z-10 bg-gradient-to-b  from-[#05050538] to-[#30352ce8] opacity-65 "></div>
             <video
-              // src="https://images.unsplash.com/photo-1469122312224-c5846569feb1?q=80&w=1978&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               src={bgvideo}
               playsInline
               ref={videoEl}
@@ -237,12 +138,7 @@ const Homepage = () => {
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path
-                      // html-stroke-linecap="round"
-                      // html-stroke-linejoin="round"
-                      // html-stroke-width="2"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    ></path>
+                    <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                   </svg>
                 </span>
                 <span className="absolute flex items-center justify-center w-full rounded-lg h-full  backdrop-blur-md text-white transition-all duration-300 transform group-hover:translate-x-full ease">
