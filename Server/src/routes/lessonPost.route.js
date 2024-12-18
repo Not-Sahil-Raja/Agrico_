@@ -3,6 +3,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import upload from "../middlewares/multer.middleware.js";
 import { LessonPost } from "../models/lessonPost.model.js";
 import { v2 as cloudinary } from "cloudinary";
+import streamifier from "streamifier";
 
 const router = express.Router();
 
