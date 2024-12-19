@@ -1,7 +1,4 @@
-import Item from "./Item";
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import InfiniteSlider from "./InfiniteSlider";
 import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
 import ArticleCard from "./ArticleCard";
