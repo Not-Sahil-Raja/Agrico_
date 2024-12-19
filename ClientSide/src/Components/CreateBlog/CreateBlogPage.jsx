@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Plus, Tag, X } from "lucide-react";
@@ -8,13 +8,7 @@ import { BlogSubmissionToast } from "./BlogSubmissionToast";
 import { AnimatePresence } from "framer-motion";
 import { BlogSubmissionFailedToast } from "./BlogSubmissionFailedToast";
 
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-  useAuth,
-} from "@clerk/clerk-react";
+import { useAuth } from "@clerk/clerk-react";
 
 const CreateBlogPage = () => {
   const [title, setTitle] = useState("");

@@ -22,7 +22,7 @@ const AgricoLogo = () => {
           <img
             src="/vite.svg"
             alt="Vite Logo"
-            className=" w-5 object-cover"
+            className=" w-5 object-cover rounded-full shadow"
             initial={{ opacity: 0 }}
             animate={{ opacity: logoAnim ? 1 : 0 }}
             transition={{ duration: 0.5 }}

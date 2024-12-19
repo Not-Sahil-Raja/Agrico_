@@ -22,8 +22,8 @@ const Header = () => {
         <CustomNavLink to="/" isActiveClass="underline ">
           Home
         </CustomNavLink>
-        <CustomNavLink to="/catlg" isActiveClass="underline ">
-          Catalogue
+        <CustomNavLink to="/article" isActiveClass="underline ">
+          Article
         </CustomNavLink>
         <CustomNavLink to="/marketPlace" isActiveClass="underline ">
           MarketPlace

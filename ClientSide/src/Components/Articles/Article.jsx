@@ -1,9 +1,14 @@
 import Item from "./Item";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import InfiniteSlider from "./InfiniteSlider";
+import axios from "axios";
+import { useAuth } from "@clerk/clerk-react";
+import ArticleCard from "./ArticleCard";
+import PopularArticle from "./PopularArticle";
 
-function Catlg() {
+function Article() {
+  const { getToken } = useAuth();
   const deb = useRef(null);
 
   const PopularCourses = [
@@ -65,6 +70,28 @@ function Catlg() {
     },
   ];
 
+  const [latestArticle, setLatestArticle] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = await getToken();
+      axios
+        .get(`${import.meta.env.VITE_SERVER}/lesson/getLessons`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setLatestArticle(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchData();
+  }, [getToken]);
+
   return (
     <>
       <div
@@ -73,48 +100,33 @@ function Catlg() {
       >
         <div className=" w-full h-full pt-[9vh]  ">
           <div className=" w-full flex flex-col">
-            <div className=" flex flex-col px-20">
-              <div className="   flex flex-col text-[#242323] whitespace-nowrap  py-1">
+            <div className=" flex flex-col h-[100svh] px-20">
+              <div className="   flex flex-col text-[#242323] whitespace-nowrap font-Archivo py-1">
                 <span className="font-medium text-3xl text-[#242424] leading-none">
-                  Popular Courses
+                  Popular Article
                 </span>
                 <span className=" text-lg text-[#505050]">
                   Try out our most popular courses !
                 </span>
               </div>
               <div className=" overflow-hidden  py-2">
-                {PopularCourses.length > 0 ? (
-                  <InfiniteSlider PopularCourses={PopularCourses} />
-                ) : (
-                  <div className=" h-[30vh] flex items-center justify-center  shadow-inner  rounded">
-                    <span className=" animate-pulse font-medium">
-                      Hold On Loading Is Almost Done...
-                    </span>
-                  </div>
-                )}
+                <PopularArticle />
               </div>
             </div>
 
             <div className=" w-full h-fit my-7 px-20">
               <div className=" flex flex-col text-[#242323] whitespace-nowrap  py-1 mb-6">
                 <span className=" font-medium text-3xl text-[#242424] leading-none">
-                  Courses
+                  Latest Articles
                 </span>
                 <span className=" text-lg text-[#505050]">
-                  Explore our wide range of courses
+                  Explore our latest articles
                 </span>
               </div>
-              {PopularCourses.length > 0 ? (
-                <div className=" grid md:grid-cols-4 sm:grid-cols-2 md:gap-3 2xl:gap-5 place-items-center">
-                  {PopularCourses.map((item) => (
-                    <Item
-                      key={item.id}
-                      id={item.id}
-                      no={item.no}
-                      cat={item.cat}
-                      back={item.back}
-                      rating={item.rating}
-                    />
+              {latestArticle.length > 0 ? (
+                <div className=" grid 2xl:grid-cols-4 lg:grid-cols-3  sm:grid-cols-2 md:gap-3 2xl:gap-5 place-items-stretch">
+                  {latestArticle.map((item, index) => (
+                    <ArticleCard ArticleData={item} key={index} />
                   ))}
                 </div>
               ) : (
@@ -132,4 +144,4 @@ function Catlg() {
   );
 }
 
-export default Catlg;
+export default Article;

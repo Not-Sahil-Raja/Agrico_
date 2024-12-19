@@ -63,4 +63,38 @@ router.post("/create", upload.array("image"), async (req, res) => {
   }
 });
 
+router.get("/getLessons", async (req, res) => {
+  try {
+    // const limit = parseInt(req.query.limit) || 10;
+    const allLessons = await LessonPost.find({}).limit(10);
+    res.status(200).send(allLessons);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get("/PopularArticles", async (req, res) => {
+  try {
+    const allLessons = await LessonPost.find({}).limit(4);
+    res.status(200).send(allLessons);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get("/getLesson/:id", async (req, res) => {
+  try {
+    const lesson = await LessonPost.findById(req.params.id);
+    if (!lesson) {
+      return res.status(404).send("Lesson Not Found");
+    }
+    res.status(200).send(lesson);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
+
 export default router;
